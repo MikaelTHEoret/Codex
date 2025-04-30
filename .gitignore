@@ -1,0 +1,43 @@
+# TeX auxiliary files
+*.aux
+*.lof
+*.log
+*.lot
+*.fls
+*.out
+*.toc
+*.fmt
+*.fot
+*.cb
+*.cb2
+.*.lb
+
+# Bibliography auxiliary files (bibtex/biblatex)
+*.bbl
+*.bcf
+*.blg
+*-blx.aux
+*-blx.bib
+*.run.xml
+
+# Build tool auxiliary files
+*.fdb_latexmk
+*.synctex
+*.synctex(busy)
+*.synctex.gz
+*.synctex.gz(busy)
+*.pdfsync
+
+# Intermediate documents
+*.dvi
+*.xdv
+*-converted-to.*
+
+# Keep PDFs that are part of the documentation
+!pdfs/**/*.pdf
+
+# Keep all .tex source files
+!**/*.tex
+
+# Environment files
+.env
