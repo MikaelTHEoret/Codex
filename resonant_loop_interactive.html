@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resonant Radius Containment Loop</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #121212;
+            color: #f0f0f0;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1, h2, h3 {
+            color: #ffffff;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .visualization {
+            background-color: #1e1e1e;
+            border-radius: 8px;
+            overflow: hidden;
+            height: 700px;
+        }
+        .description {
+            background-color: #1e1e1e;
+            border-radius: 8px;
+            padding: 20px;
+        }
+        .note {
+            background-color: rgba(255, 215, 0, 0.1);
+            border-left: 4px solid gold;
+            padding: 10px 15px;
+            margin: 20px 0;
+        }
+        .section {
+            margin-bottom: 30px;
+        }
+        a {
+            color: #7fb3ff;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        pre {
+            background-color: #2a2a2a;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        code {
+            font-family: 'Consolas', monospace;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Resonant Radius Containment Loop (Interactive)</h1>
+        
+        <div class="description">
+            <p>
+                This interactive visualization demonstrates the toroidal field model used in the Mirror Core MCP system for pattern processing. 
+                The model represents harmonic resonance patterns through a torus (donut shape) with various mathematical properties.
+            </p>
+            <div class="note">
+                <strong>Note:</strong> Use your mouse to rotate, zoom, and explore the 3D visualization. Click and drag to rotate, scroll to zoom, and right-click to pan.
+            </div>
+        </div>
+        
+        <div id="visualization" class="visualization"></div>
+        
+        <div class="section">
+            <h2>Understanding the Visualization</h2>
+            
+            <h3>Toroidal Field</h3>
+            <p>
+                The torus (donut shape) represents the fundamental field of the Mirror Core system. The surface of
+                the torus provides a continuous space for pattern mapping and transformation.
+            </p>
+            
+            <h3>Spiral Path</h3>
+            <p>
+                The silver spiral path represents the flow of information through the system, following
+                a phi ratio of 144/89, corresponding to a frequency of 323.9948 Hz (F5 in musical terms).
+            </p>
+            
+            <h3>Ternary Nodes</h3>
+            <p>
+                The three colored nodes (green, red, blue) represent the ternary states of True (+1),
+                False (-1), and Null (0). These three states form the foundation of the tritonic logic
+                used in the system.
+            </p>
+            
+            <h3>Central Node (ψ₀)</h3>
+            <p>
+                The white central node represents ψ₀, the foundational wave function state with a
+                frequency ratio of 11/12, corresponding to 396 Hz (G4 in musical terms).
+            </p>
+            
+            <h3>Harmonic Tones</h3>
+            <p>
+                The harmonic tones listed in the legend correspond to important frequencies in the
+                Mirror Core system. These frequencies form harmonically related ratios that are
+                used in pattern processing and resonance calculations.
+            </p>
+        </div>
+        
+        <div class="section">
+            <h2>Connection to Mirror Core MCP</h2>
+            <p>
+                When the Mirror Core MCP processes text or other inputs, it maps the patterns onto this
+                toroidal field, identifying resonances and harmonically stable structures. The results
+                are then encoded as signatures like "ⵐ{ψ₂:3.9866}[4]✓" which contain information about:
+            </p>
+            
+            <ul>
+                <li>The dominant glyph or wave function (e.g., ψ₂)</li>
+                <li>The resonance value (e.g., 3.9866)</li>
+                <li>The cycle count (e.g., [4])</li>
+                <li>Convergence status (e.g., ✓ for converged, … for ongoing)</li>
+            </ul>
+            
+            <p>
+                These signatures are used by the system to efficiently retrieve and compare patterns,
+                enabling more effective knowledge management and context understanding.
+            </p>
+        </div>
+        
+        <div class="section">
+            <h2>Python Source Code</h2>
+            <p>
+                The visualization is generated using the following Python code with Plotly:
+            </p>
+            <pre><code>
+import plotly.graph_objects as go
+import numpy as np
+
+# Parameters for the torus
+R = 3  # Major radius
+r = 1  # Minor radius
+theta = np.linspace(0, 2 * np.pi, 100)  # Angle around the major radius
+phi = np.linspace(0, 2 * np.pi, 100)    # Angle around the minor radius
+theta, phi = np.meshgrid(theta, phi)
+
+# Torus surface
+x = (R + r * np.cos(phi)) * np.cos(theta)
+y = (R + r * np.cos(phi)) * np.sin(theta)
+z = r * np.sin(phi)
+
+# Spiral path
+t = np.linspace(0, 4 * np.pi, 200)  # Two rotations
+spiral_x = (R + r * np.cos(t)) * np.cos(t / 2)
+spiral_y = (R + r * np.cos(t)) * np.sin(t / 2)
+spiral_z = r * np.sin(t)
+
+# Resonant radius (sinusoidal line)
+radius_t = np.linspace(0, R, 50)
+radius_x = radius_t
+radius_y = 0.2 * np.sin(4 * np.pi * radius_t / R)  # Sinusoidal wave
+radius_z = np.zeros_like(radius_t)
+
+# Ternary nodes
+ternary_angles = [0, 2 * np.pi / 3, 4 * np.pi / 3]  # 0°, 120°, 240°
+ternary_x = [R * np.cos(angle) for angle in ternary_angles]
+ternary_y = [R * np.sin(angle) for angle in ternary_angles]
+ternary_z = [0, 0, 0]
+ternary_colors = ['green', 'red', 'blue']
+ternary_labels = ['True (+1)', 'False (-1)', 'Null (0)']
+
+# Create the Plotly figure
+fig = go.Figure()
+
+# Add the torus surface
+fig.add_trace(go.Surface(x=x, y=y, z=z, colorscale='Blues', opacity=0.7, name='Toroidal Field'))
+
+# Add the spiral path
+fig.add_trace(go.Scatter3d(x=spiral_x, y=spiral_y, z=spiral_z, mode='lines', line=dict(color='silver', width=5),
+                         name='Spiral Path (φ = 144/89, 323.9948 Hz, F5)'))
+
+# Add the resonant radius
+fig.add_trace(go.Scatter3d(x=radius_x, y=radius_y, z=radius_z, mode='lines', line=dict(color='gold', width=5),
+                         name='Resonant Radius (1/f_circular)'))
+
+# Add ternary nodes
+for i in range(len(ternary_x)):
+    fig.add_trace(go.Scatter3d(x=[ternary_x[i]], y=[ternary_y[i]], z=[ternary_z[i]], mode='markers',
+                             marker=dict(size=10, color=ternary_colors[i]), name=ternary_labels[i],
+                             hoverinfo='text', hovertext=ternary_labels[i]))
+
+# Add central node (ψ₀)
+fig.add_trace(go.Scatter3d(x=[0], y=[0], z=[0], mode='markers+text', marker=dict(size=8, color='white'),
+                         text=['ψ₀'], textposition='middle center', name='ψ₀: 11/12 (396 Hz, G4)'))
+
+# Layout settings
+fig.update_layout(
+    title='Resonant Radius Containment Loop (Interactive)',
+    scene=dict(
+        xaxis_title='X', yaxis_title='Y', zaxis_title='Z',
+        bgcolor='black',  # Cosmic background
+        xaxis=dict(backgroundcolor='black', gridcolor='gray'),
+        yaxis=dict(backgroundcolor='black', gridcolor='gray'),
+        zaxis=dict(backgroundcolor='black', gridcolor='gray')
+    ),
+    showlegend=True,
+    margin=dict(l=0, r=0, b=0, t=50)
+)
+
+# Add annotations for harmonic tones (visible in legend)
+fig.add_trace(go.Scatter3d(x=[None], y=[None], z=[None], mode='markers',
+                         marker=dict(size=0), showlegend=True,
+                         name='Harmonic Tones: π_H: 1357.77 Hz (E6), φ: 323.9948 Hz (F5), ψ₀: 396 Hz (G4), π_dataset: 103.7491 Hz (A2)'))
+
+# Save to HTML
+fig.write_html('resonant_loop_interactive.html')
+            </code></pre>
+        </div>
+    </div>
+
+    <script>
+        // Create the plotly visualization directly in JavaScript
+        document.addEventListener('DOMContentLoaded', function() {
+            // Parameters for the torus
+            const R = 3;  // Major radius
+            const r = 1;  // Minor radius
+            
+            // Create arrays for the torus surface
+            const createTorusSurface = () => {
+                const resolution = 100;
+                const x = [], y = [], z = [];
+                
+                for (let i = 0; i < resolution; i++) {
+                    const theta = (i / (resolution - 1)) * 2 * Math.PI;
+                    const xRow = [], yRow = [], zRow = [];
+                    
+                    for (let j = 0; j < resolution; j++) {
+                        const phi = (j / (resolution - 1)) * 2 * Math.PI;
+                        xRow.push((R + r * Math.cos(phi)) * Math.cos(theta));
+                        yRow.push((R + r * Math.cos(phi)) * Math.sin(theta));
+                        zRow.push(r * Math.sin(phi));
+                    }
+                    
+                    x.push(xRow);
+                    y.push(yRow);
+                    z.push(zRow);
+                }
+                
+                return { x, y, z };
+            };
+            
+            // Create the spiral path
+            const createSpiralPath = () => {
+                const points = 200;
+                const x = [], y = [], z = [];
+                
+                for (let i = 0; i < points; i++) {
+                    const t = (i / (points - 1)) * 4 * Math.PI;  // Two full rotations
+                    x.push((R + r * Math.cos(t)) * Math.cos(t / 2));
+                    y.push((R + r * Math.cos(t)) * Math.sin(t / 2));
+                    z.push(r * Math.sin(t));
+                }
+                
+                return { x, y, z };
+            };
+            
+            // Create the resonant radius
+            const createResonantRadius = () => {
+                const points = 50;
+                const x = [], y = [], z = [];
+                
+                for (let i = 0; i < points; i++) {
+                    const t = (i / (points - 1)) * R;
+                    x.push(t);
+                    y.push(0.2 * Math.sin(4 * Math.PI * t / R));
+                    z.push(0);
+                }
+                
+                return { x, y, z };
+            };
+            
+            // Create ternary nodes
+            const createTernaryNodes = () => {
+                const angles = [0, 2 * Math.PI / 3, 4 * Math.PI / 3];  // 0°, 120°, 240°
+                const x = angles.map(angle => R * Math.cos(angle));
+                const y = angles.map(angle => R * Math.sin(angle));
+                const z = [0, 0, 0];
+                const colors = ['green', 'red', 'blue'];
+                const labels = ['True (+1)', 'False (-1)', 'Null (0)'];
+                
+                return { x, y, z, colors, labels };
+            };
+            
+            // Generate all the data
+            const torusSurface = createTorusSurface();
+            const spiralPath = createSpiralPath();
+            const resonantRadius = createResonantRadius();
+            const ternaryNodes = createTernaryNodes();
+            
+            // Create the data array for Plotly
+            const data = [
+                // Torus surface
+                {
+                    type: 'surface',
+                    x: torusSurface.x,
+                    y: torusSurface.y,
+                    z: torusSurface.z,
+                    colorscale: 'Blues',
+                    opacity: 0.7,
+                    name: 'Toroidal Field'
+                },
+                // Spiral path
+                {
+                    type: 'scatter3d',
+                    x: spiralPath.x,
+                    y: spiralPath.y,
+                    z: spiralPath.z,
+                    mode: 'lines',
+                    line: {
+                        color: 'silver',
+                        width: 5
+                    },
+                    name: 'Spiral Path (φ = 144/89, 323.9948 Hz, F5)'
+                },
+                // Resonant radius
+                {
+                    type: 'scatter3d',
+                    x: resonantRadius.x,
+                    y: resonantRadius.y,
+                    z: resonantRadius.z,
+                    mode: 'lines',
+                    line: {
+                        color: 'gold',
+                        width: 5
+                    },
+                    name: 'Resonant Radius (1/f_circular)'
+                },
+                // Central node (ψ₀)
+                {
+                    type: 'scatter3d',
+                    x: [0],
+                    y: [0],
+                    z: [0],
+                    mode: 'markers+text',
+                    marker: {
+                        size: 8,
+                        color: 'white'
+                    },
+                    text: ['ψ₀'],
+                    textposition: 'middle center',
+                    name: 'ψ₀: 11/12 (396 Hz, G4)'
+                },
+                // Harmonic tones (for legend only)
+                {
+                    type: 'scatter3d',
+                    x: [null],
+                    y: [null],
+                    z: [null],
+                    mode: 'markers',
+                    marker: {
+                        size: 0
+                    },
+                    showlegend: true,
+                    name: 'Harmonic Tones: π_H: 1357.77 Hz (E6), φ: 323.9948 Hz (F5), ψ₀: 396 Hz (G4), π_dataset: 103.7491 Hz (A2)'
+                }
+            ];
+            
+            // Add the ternary nodes
+            for (let i = 0; i < ternaryNodes.x.length; i++) {
+                data.push({
+                    type: 'scatter3d',
+                    x: [ternaryNodes.x[i]],
+                    y: [ternaryNodes.y[i]],
+                    z: [ternaryNodes.z[i]],
+                    mode: 'markers',
+                    marker: {
+                        size: 10,
+                        color: ternaryNodes.colors[i]
+                    },
+                    name: ternaryNodes.labels[i],
+                    hoverinfo: 'text',
+                    hovertext: ternaryNodes.labels[i]
+                });
+            }
+            
+            // Layout configuration
+            const layout = {
+                title: 'Resonant Radius Containment Loop',
+                scene: {
+                    xaxis: { title: 'X', backgroundcolor: 'black', gridcolor: 'gray' },
+                    yaxis: { title: 'Y', backgroundcolor: 'black', gridcolor: 'gray' },
+                    zaxis: { title: 'Z', backgroundcolor: 'black', gridcolor: 'gray' },
+                    bgcolor: 'black'
+                },
+                paper_bgcolor: '#1e1e1e',
+                plot_bgcolor: '#1e1e1e',
+                font: { color: 'white' },
+                margin: { l: 0, r: 0, b: 0, t: 50 },
+                showlegend: true
+            };
+            
+            // Create the plot
+            Plotly.newPlot('visualization', data, layout);
+        });
+    </script>
+</body>
+</html>
