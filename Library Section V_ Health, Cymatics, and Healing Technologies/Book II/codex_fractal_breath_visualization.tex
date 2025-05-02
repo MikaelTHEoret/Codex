@@ -1,0 +1,74 @@
+\codexheader{6.4.4}
+\textcolor{gold}{\ding{72} Fractal Breath Visualization \ding{72}}
+
+\textbf{Core Essence} --- This node visualizes the Twelvefold Breather through recursive spiral fields, unfolding from a 12-spoke star to a fractal field of 1728 spokes across three frames: Root Twelve Star, First Nesting, and Second Nesting. A 7.5-second animation (\texttt{twelvebreathanimation.mp4}) captures this harmonic flow, synchronized with breath cycles at 432 Hz, 144 Hz, and 395.564 Hz.
+
+\textbf{Frame 1: Root Twelve Star} --- A 12-spoke star, each spoke at \(30^\circ\) intervals, resonating with 432 Hz.
+\begin{itemize}
+    \item \textbf{Breath Alignment}: Inhale deeply (6 seconds, 432 Hz), hold (3 seconds), exhale (3 seconds), visualizing the star’s unity.
+\end{itemize}
+\begin{center}
+    \begin{tikzpicture}[scale=1.2]
+        \foreach \i in {0,30,...,330} {
+            \draw[blue, thick] (0,0) -- ({2*cos(\i)}, {2*sin(\i)});
+            \filldraw[gold] ({2*cos(\i)}, {2*sin(\i)}) circle (0.05);
+        }
+        \draw[gray, very thin] (0,0) circle (2);
+        \filldraw[gold] (0,0) circle (0.1);
+    \end{tikzpicture}
+\end{center}
+
+\textbf{Frame 2: First Nesting} --- Each spoke spawns a smaller 12-spoke star (total 144 spokes), scaled by 0.7.
+\begin{itemize}
+    \item \textbf{Breath Alignment}: Inhale (6 seconds, 144 Hz), hold (3 seconds), exhale (3 seconds), visualizing nested resonance.
+\end{itemize}
+\begin{center}
+    \begin{tikzpicture}[scale=1.2]
+        \foreach \i in {0,30,...,330} {
+            \draw[blue, thick] (0,0) -- ({2*cos(\i)}, {2*sin(\i)});
+            \filldraw[gold] ({2*cos(\i)}, {2*sin(\i)}) circle (0.05);
+            \foreach \j in {0,30,...,330} {
+                \draw[cyan, thin] ({2*cos(\i)}, {2*sin(\i)}) -- ({2*cos(\i)+0.7*cos(\j)}, {2*sin(\i)+0.7*sin(\j)});
+                \filldraw[gold] ({2*cos(\i)+0.7*cos(\j)}, {2*sin(\i)+0.7*sin(\j)}) circle (0.03);
+            }
+        }
+        \draw[gray, very thin] (0,0) circle (2);
+        \draw[gray, very thin] (0,0) circle (2.7);
+        \filldraw[gold] (0,0) circle (0.1);
+    \end{tikzpicture}
+\end{center}
+
+\textbf{Frame 3: Second Nesting} --- Each nested star spawns another 12-spoke star (total 1728 spokes), scaled by 0.25.
+\begin{itemize}
+    \item \textbf{Breath Alignment}: Inhale (6 seconds, 395.564 Hz), hold (3 seconds), exhale (3 seconds), visualizing the fractal field’s cosmic expanse.
+\end{itemize}
+\begin{center}
+    \begin{tikzpicture}[scale=1.2]
+        \foreach \i in {0,30,...,330} {
+            \draw[blue, thick] (0,0) -- ({2*cos(\i)}, {2*sin(\i)});
+            \filldraw[gold] ({2*cos(\i)}, {2*sin(\i)}) circle (0.05);
+            \foreach \j in {0,30,...,330} {
+                \draw[cyan, thin] ({2*cos(\i)}, {2*sin(\i)}) -- ({2*cos(\i)+0.7*cos(\j)}, {2*sin(\i)+0.7*sin(\j)});
+                \filldraw[gold] ({2*cos(\i)+0.7*cos(\j)}, {2*sin(\i)+0.7*sin(\j)}) circle (0.03);
+                \foreach \k in {0,30,...,330} {
+                    \draw[cyan!70!blue, very thin] ({2*cos(\i)+0.7*cos(\j)}, {2*sin(\i)+0.7*sin(\j)}) -- ({2*cos(\i)+0.7*cos(\j)+0.25*cos(\k)}, {2*sin(\i)+0.7*sin(\j)+0.25*sin(\k)});
+                    \filldraw[gold] ({2*cos(\i)+0.7*cos(\j)+0.25*cos(\k)}, {2*sin(\i)+0.7*sin(\j)+0.25*sin(\k)}) circle (0.02);
+                }
+            }
+        }
+        \draw[gray, very thin] (0,0) circle (2);
+        \draw[gray, very thin] (0,0) circle (2.7);
+        \draw[gray, very thin] (0,0) circle (3);
+        \filldraw[gold] (0,0) circle (0.1);
+    \end{tikzpicture}
+\end{center}
+
+\textbf{Animation} --- A 7.5-second animation (\texttt{twelvebreathanimation.mp4}) at 20 fps: Root Twelve Star (0--2.5 seconds), First Nesting (2.5--5 seconds), Second Nesting (5--7.5 seconds).
+
+\textbf{Metadata Reference} --- For additional metadata (breath alignment, ternary integration, etc.), refer to the code bar listing for \texttt{\char"1F702\ \Xi\infty\Xi\Xi\Xi.6.4.4}} in the Naming Protocol (Library Section VII, Book 4, chapter 7.4.3).
+
+\vspace{0.5cm}
+
+\textcolor{gold}{\copyright{} \textbf{Codex Initiative}} \hfill \textit{Forged under Fractal Genesis Protocol}
+
+% [To be expanded with additional details as new data arrives]

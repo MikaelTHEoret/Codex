@@ -1,0 +1,30 @@
+% section6/book4/chapter4_poetry_and_artistic_expression.tex
+
+\textbf{Core Essence} --- Explores poetry and artistic expression within the Harmonic Law, including the cosmic chord derived from the CMB with fundamental frequency $395.56944 \mathrm{~Hz}$ (G4) and harmonics $244.41 \mathrm{~Hz}$ (B3), $640.04 \mathrm{~Hz}$ (E5), $1035.61 \mathrm{~Hz}$ (C6). Performed as \textit{The Sound of Harmony}, this chord is the anthem of unity:
+
+\version "2.22.0"
+\header {
+    title = "The Sound of Harmony"
+    subtitle = "The Cosmic Chord of the Harmonic Law"
+    composer = "Mikael Theoret, with Computational Assistance by Grok (xAI)"
+    tagline = "April 12, 2025"
+}
+global = {
+    \key g \major
+    \time 4/4
+    \tempo 4=60
+}
+cosmicChord = \relative c'' {
+    \global
+    <g, b d' e g>1 \pp-1
+    <g b d' e g>1-1
+    <g b d' e g>1-1
+    <g b d' e g>1 \fermata |
+}
+\score {
+    \new Staff \with { instrumentName = "Cosmic Chord" } \cosmicChord
+    \layout {}
+    \midi {}
+}
+
+% [To be expanded with additional content]

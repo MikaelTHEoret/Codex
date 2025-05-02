@@ -1,0 +1,464 @@
+\documentclass[a4paper]{article}
+
+% --- Packages ---
+\usepackage{amsmath, amssymb, mathtools, xcolor}
+\usepackage{titlesec}
+\usepackage{graphicx}
+\usepackage{pifont}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{geometry}
+\usepackage{fontspec}
+\usepackage{listings}
+\usepackage{tikz}
+\usetikzlibrary{decorations.pathmorphing}
+\usepackage{morewrites}
+\usepackage{textcomp}
+\usepackage{eso-pic}
+
+% Define \Sha for Tate-Shafarevich group
+\DeclareMathOperator{\Sha}{\text{Ш}}
+
+% Geometry
+\geometry{margin=1.2in}
+
+% Font Setup
+\setmainfont{DejaVu Sans}
+\newfontfamily\devanagarifont{Noto Sans Devanagari}[ItalicFont={},BoldFont={},BoldItalicFont={}]
+\newfontfamily\japanesefont{Noto Sans CJK JP}
+\newfontfamily\mathfont{Noto Sans Math}[ItalicFont={},BoldFont={},BoldItalicFont={}]
+\newfontfamily\greekfont{Noto Sans}
+\newfontfamily\symbolfont{Noto Sans Symbols}
+
+% Custom Commands for Missing Characters
+\newcommand{\samplecharA}{{\japanesefont 〤}} % U+3024
+\newcommand{\samplecharB}{{\japanesefont 〥}} % U+3025
+\newcommand{\samplecharC}{{\mathfont ⟐}} % U+27D0
+\renewcommand{\primordialmemory}{{\symbolfont \char"2605\char"2605}} % U+2605 (★)
+\renewcommand{\mysticforgecore}{{\symbolfont \char"269B\char"269B}} % U+269B (⚛)
+\renewcommand{\alchemistnode}{{\symbolfont \char"2625}} % U+2625 (☥)
+\newcommand{\cruciblechamber}{{\greekfont ΞΦ}}
+\newcommand{\vibrationbreath}{{\devanagarifont ॐ}}
+\renewcommand{\lotuscreation}{{\symbolfont \char"273F\char"273F}} % U+273F (✿)
+\renewcommand{\eyeofspiral}{{\mathfont \char"29BF\char"29BF}} % U+29BF (⦿)
+\renewcommand{\fractalflower}{{\symbolfont \char"274A\char"274A}} % U+274A (❊)
+
+% Base-12 Glyphs
+\newcommand{\deck}{\char"2469} % U+2469 (⑩) for 10
+\newcommand{\el}{\char"246A} % U+246A (⑪) for 11
+\newcommand{\twelvesymbol}{\char"246B} % U+246B (⑫) for 12
+
+% Command for Node Identifiers
+\newcommand{\nodeID}[1]{\texttt{\(\Xi\mathcal{M}\)\text{-PN.#1}}}
+
+% Allow hyphenation for node identifiers
+\hyphenation{Xi-Ma-the-ma-ti-cal-PN}
+
+% Color and Style
+\definecolor{gold}{RGB}{212,175,55}
+\definecolor{codexwhite}{RGB}{255,255,255}
+\pagecolor{black}
+\color{codexwhite}
+
+% Set default font size to \small
+\renewcommand{\normalsize}{\small}
+
+% Section Styling
+\titleformat{\section}{\color{gold}\normalfont\Large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\color{gold}\normalfont\normalsize\bfseries}{\thesubsection}{1em}{}
+
+% Listings Setup
+\lstset{
+    language=Python,
+    basicstyle=\ttfamily\small\color{codexwhite},
+    backgroundcolor=\color{black},
+    keywordstyle=\color{gold},
+    stringstyle=\color{gold},
+    commentstyle=\color{gray},
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    stepnumber=1,
+    numbersep=5pt,
+    frame=single,
+    framerule=0.5pt,
+    rulecolor=\color{gold},
+    breaklines=true,
+    breakatwhitespace=true,
+    tabsize=4
+}
+
+% Codex Single-Bar Header Command (Updated for New Code Bar Format)
+\newcommand{\codexheader}[1]{%
+    \begin{center}
+        \vspace{-0.2cm}
+        \textcolor{gold}{\small \texttt{\char"1F702\ \Xi\infty\Xi\Xi\Xi.#1}}}
+    \end{center}
+    \vspace{0.3cm}
+}
+
+% Set background frame for all pages
+\AddToShipoutPictureBG{%
+    \AtPageLowerLeft{%
+        \includegraphics[width=\paperwidth,height=\paperheight]{codex_frame.png}%
+    }%
+}
+
+% Document
+\begin{document}
+
+% Title Page
+\begin{titlepage}
+    \centering
+    \vspace*{2cm}
+    {\color{gold}\Huge\bfseries The Codex of Harmonic Unity: A Vibrational Synthesis of Mathematics and Metaphysics\par}
+    \vspace{0.5cm}
+    {\color{codexwhite}\Large Mikaël Theroret \hfill April 29, 2025\par}
+    \vspace{2cm}
+    {\color{codexwhite}\large A Journey Through Resonance, Triadic Folds, and Cosmic Harmony\par}
+    \vfill
+    \begin{center}
+        \begin{figure}
+            \centering
+            \includegraphics[width=0.5\linewidth]{ChatGPT Image Apr 30, 2025, 12_39_27 AM.png}
+            \label{fig:enter-label}
+        \end{figure}
+    \end{center}
+\end{titlepage}
+
+% TOC on page 2
+\clearpage
+\thispagestyle{plain}
+\tableofcontents
+\clearpage
+\thispagestyle{empty}
+\phantom{}
+\clearpage
+
+% Library Section I: Foundations of Harmonic Truth
+\section{Library Section I: Foundations of Harmonic Truth}
+
+\subsection{Book 1: Establishing the Basics}
+\codexheader{1.1.1}
+\textcolor{gold}{\ding{72} Accepted Facts \ding{72}}
+%\input{section1/book1/chapter1_accepted_facts}
+\codexheader{1.1.2}
+\textcolor{gold}{\ding{72} Harmonic Introduction \ding{72}}
+%\input{section1/book1/chapter1_harmonic_introduction}
+\codexheader{1.1.3}
+\input{section1/book1/codex_glyph_seed}
+\codexheader{1.1.4}
+\input{section1/book1/chapter1_skeptics_journey}
+
+\subsection{Book 2: Axioms and Duality}
+\codexheader{1.2.1}
+\input{section1/book2/codex_fundamental_truths}
+\codexheader{1.2.2}
+\input{section1/book2/chapter2_duality_principles}
+\codexheader{1.2.4}
+\input{section1/book2/codex_harmonic_inversion}
+\codexheader{1.2.5}
+\input{section1/book2/codex_harmonic_monad}
+
+\subsection{Book 3: Core Constructs and Patterns}
+\codexheader{1.3.1}
+\input{section1/book3/codex_mystic_forge_core}
+\codexheader{1.3.2}
+\input{section1/book3/codex_plane_of_knowledge}
+\codexheader{1.3.3}
+\input{section1/book3/codex_central_nexus_core}
+\codexheader{1.3.4}
+\input{section1/book3/codex_cosmic_dynamics_core}
+\codexheader{1.3.5}
+\input{section1/book3/chapter3_galactic_formation_pattern}
+\codexheader{1.3.6}
+\input{section1/book3/codex_metaphysical_resonance_core}
+\codexheader{1.3.7}
+\input{section1/book3/chapter3_consciousness_signature}
+\codexheader{1.3.8}
+\input{section1/book3/codex_cryptographic_harmony_core}
+\codexheader{1.3.9}
+\input{section1/book3/chapter3_frequency_mapping_pattern}
+\codexheader{1.3.10}
+\input{section1/book3/chapter3_aethernet_communion}
+\codexheader{1.3.11}
+\input{section1/book3/codex_base_12}
+\codexheader{1.3.12}
+\input{section1/book3/codex_omega_aether_equation}
+\codexheader{1.3.13}
+\input{section1/book3/codex_harmonic_unification_overview}
+\codexheader{1.3.14}
+\input{section1/book3/codex_prime_harmonic_nodes}
+
+% Library Section II: Aether and Physical Exploration
+\section{Library Section II: Aether and Physical Exploration}
+
+\subsection{Book 1: Aetheric Foundations}
+\codexheader{2.1.1}
+\input{section2/book1/codex_aether_world}
+\codexheader{2.1.2}
+\input{section2/book1/codex_aetheric_linker}
+\codexheader{2.1.3}
+\input{section2/book1/codex_aether_archive}
+\codexheader{2.1.4}
+\input{section2/book1/codex_aether_harmonic_framework}
+\codexheader{2.1.5}
+\input{section2/book1/codex_aether_harmonic_genesis}
+\codexheader{2.1.6}
+\input{section2/book1/codex_aether_millennium}
+\codexheader{2.1.7}
+\input{section2/book1/codex_aether_resolution}
+\codexheader{2.1.8}
+\input{section2/book1/codex_aether_volume_III}
+\codexheader{2.1.9}
+\input{section2/book1/codex_aether_volume_v}
+\codexheader{2.1.10}
+\input{section2/book1/codex_aether_world_master}
+\codexheader{2.1.11}
+\input{section2/book1/codex_harmonic_genesis}
+\codexheader{2.1.12}
+\input{section2/book1/codex_genesis_equation}
+\codexheader{2.1.13}
+\input{section2/book1/codex_harmonic_future}
+\codexheader{2.1.14}
+\input{section2/book1/codex_aether_axioms}
+
+\subsection{Book 2: Physical Explorations}
+\codexheader{2.2.1}
+\input{section2/book2/chapter2_physical_explorations}
+\codexheader{2.2.2}
+\input{section2/book2/chapter2_quantum_mechanics_harmonic}
+\codexheader{2.2.3}
+\input{section2/book2/chapter2_relativity_harmonic}
+\codexheader{2.2.4}
+\input{section2/book2/codex_bosons_harmonic}
+
+\subsection{Book 3: Cosmological Insights}
+\codexheader{2.3.1}
+\input{section2/book3/chapter3_cosmological_insights}
+\codexheader{2.3.2}
+\input{section2/book3/chapter3_aetheric_foundations}
+
+% Library Section III: The Colosseum of Truth
+\section{Library Section III: The Colosseum of Truth}
+
+\subsection{Book 1: The 7 Pillars}
+\codexheader{3.1.1}
+\input{section3/book1/codex_p_vs_np}
+\codexheader{3.1.2}
+\input{section3/book1/chapter1_p_vs_np_resolution}
+\codexheader{3.1.3}
+\input{section3/book1/codex_riemann_hypothesis}
+\codexheader{3.1.4}
+\input{section3/book1/chapter1_riemann_hypothesis_resolution}
+\codexheader{3.1.5}
+\input{section3/book1/codex_yang_mills}
+\codexheader{3.1.6}
+\input{section3/book1/chapter1_yang_mills_resolution}
+\codexheader{3.1.7}
+\input{section3/book1/codex_navier_stokes}
+\codexheader{3.1.8}
+\input{section3/book1/chapter1_navier_stokes_resolution}
+\codexheader{3.1.9}
+\input{section3/book1/codex_hodge_conjecture}
+\codexheader{3.1.10}
+\input{section3/book1/chapter1_hodge_conjecture_resolution}
+\codexheader{3.1.11}
+\input{section3/book1/codex_poincare_conjecture}
+\codexheader{3.1.12}
+\input{section3/book1/chapter1_poincare_conjecture_resolution}
+\codexheader{3.1.13}
+\input{section3/book1/codex_birch_swinnerton_dyer}
+\codexheader{3.1.14}
+\input{section3/book1/chapter1_birch_swinnerton_dyer_resolution}
+
+\subsection{Book 2: The 13 Seals}
+\codexheader{3.2.1}
+\input{section3/book2/chapter2_seal_1}
+\codexheader{3.2.2}
+\input{section3/book2/chapter2_seal_2}
+\codexheader{3.2.3}
+\input{section3/book2/chapter2_seal_3}
+\codexheader{3.2.4}
+\input{section3/book2/chapter2_seal_4}
+\codexheader{3.2.5}
+\input{section3/book2/chapter2_seal_5}
+\codexheader{3.2.6}
+\input{section3/book2/chapter2_seal_6}
+\codexheader{3.2.7}
+\input{section3/book2/chapter2_seal_7}
+\codexheader{3.2.8}
+\input{section3/book2/chapter2_seal_8}
+\codexheader{3.2.9}
+\input{section3/book2/chapter2_seal_9}
+\codexheader{3.2.10}
+\input{section3/book2/chapter2_seal_10}
+\codexheader{3.2.11}
+\input{section3/book2/chapter2_seal_11}
+\codexheader{3.2.12}
+\input{section3/book2/chapter2_seal_12}
+\codexheader{3.2.13}
+\input{section3/book2/chapter2_seal_13}
+\codexheader{3.2.14}
+\input{section3/book2/codex_final_three_mysteries}
+
+\subsection{Book 3: Resolutions of Mysteries and Paradoxes}
+\codexheader{3.3.1}
+\input{section3/book3/codex_final_prophecy}
+\codexheader{3.3.2}
+\input{section3/book3/chapter4_connection_code}
+\codexheader{3.3.3}
+\input{section3/book3/chapter4_symbolic_resolutions}
+\codexheader{3.3.4}
+\input{section3/book3/chapter4_godel_paradox}
+\codexheader{3.3.5}
+\input{section3/book3/codex_nullification_paradox}
+
+% Library Section IV: Blueprints, Experiments, and Innovations
+\section{Library Section IV: Blueprints, Experiments, and Innovations}
+
+\subsection{Book 1: Proposed Experiments and Simulations}
+\codexheader{4.1.1}
+\input{section4/book1/chapter1_proposed_experiments_and_simulations}
+\codexheader{4.1.2}
+\input{section4/book1/chapter1_sequence_of_genesis_events}
+\codexheader{4.1.3}
+\input{section4/book1/codex_aether_field_experiments}
+
+\subsection{Book 2: Innovative Applications}
+\codexheader{4.2.1}
+\input{section4/book2/chapter2_harmonic_applications_cryptography_blockchain}
+\codexheader{4.2.2}
+\input{section4/book2/codex_tesla_kang}
+\codexheader{4.2.3}
+\input{section4/book2/chapter2_sacred_cone_volume}
+\codexheader{4.2.4}
+\input{section4/book2/chapter2_signal_processing}
+\codexheader{4.2.5}
+\input{section4/book2/chapter2_computational_modeling}
+\codexheader{4.2.6}
+\input{section4/book2/codex_applications_harmonic_unification}
+
+\subsection{Book 3: Theorycrafting and New Devices}
+\codexheader{4.3.1}
+\input{section4/book3/chapter3_theorycrafting_and_new_devices}
+\codexheader{4.3.2}
+\input{section4/book3/codex_ternary_logic}
+\codexheader{4.3.3}
+\input{section4/book3/codex_ternary_chains}
+
+% Library Section V: Health, Cymatics, and Healing Technologies
+\section{Library Section V: Health, Cymatics, and Healing Technologies}
+
+\subsection{Book 1: Cymatics and Harmonic Healing}
+\codexheader{5.1.1}
+\input{section5/book1/chapter1_cymatics_and_harmonic_healing}
+\codexheader{5.1.2}
+\input{section5/book1/chapter1_musical_relationships_triadic_folds}
+\codexheader{5.1.3}
+\input{section5/book1/chapter1_base_12_musical_alignment}
+\codexheader{4.1.4}
+\input{section5/book1/chapter1_harmonic_analysis_formula}
+\codexheader{5.1.5}
+\input{section5/book1/chapter1_cymatics_vibrational_analysis}
+\codexheader{5.1.6}
+\input{section5/book1/codex_twelve_breath_sequence}
+
+\subsection{Book 2: Consciousness and Health Applications}
+\codexheader{5.2.1}
+\input{section5/book2/chapter2_consciousness_and_health_applications}
+\codexheader{5.2.2}
+\input{section5/book2/chapter2_dna_harmonics}
+
+\subsection{Book 3: Quantum Healing Technologies}
+\codexheader{5.3.1}
+\input{section5/book3/chapter3_quantum_healing_technologies}
+\codexheader{5.3.2}
+\input{section5/book3/chapter3_harmonic_resonance_therapy}
+\codexheader{5.3.3}
+\input{section5/book3/codex_aum_harmonic_reactors}
+
+% Library Section VI: Art, Mythology, and Alchemy
+\section{Library Section VI: Art, Mythology, and Alchemy}
+
+\subsection{Book 1: Narrative of the Codex}
+\codexheader{6.1.1}
+\input{section6/book1/chapter1_narrative_of_the_codex}
+\codexheader{6.1.2}
+\input{section6/book1/chapter1_codex_creation_myth}
+\codexheader{6.1.3}
+\input{section6/book1/codex_bible_omega}
+
+\subsection{Book 2: Harmonic Genesis Myth}
+\codexheader{6.2.1}
+\input{section6/book2/chapter2_harmonic_genesis_myth}
+\codexheader{6.2.2}
+\input{section6/book2/chapter2_ancient_myth_correlations}
+\codexheader{6.2.3}
+\input{section6/book2/chapter2_modern_artifact_myth}
+\codexheader{6.2.4}
+\input{section6/book2/codex_arkheaxis}
+
+\subsection{Book 3: Alchemical Explorations}
+\codexheader{6.3.1}
+\input{section6/book3/chapter3_alchemical_explorations}
+\codexheader{6.3.2}
+\input{section6/book3/chapter3_transmutation_principles}
+
+\subsection{Book 4: Poetry and Artistic Expression}
+\codexheader{6.4.1}
+\input{section6/book4/chapter4_poetry_and_artistic_expression}
+\codexheader{6.4.2}
+\input{section6/book4/chapter4_cymatic_exploration}
+\codexheader{6.4.3}
+\input{section6/book4/chapter4_harmonic_drawings}
+\codexheader{6.4.4}
+\input{section6/book4/codex_fractal_breath_visualization}
+
+% Library Section VII: Lexicon of Harmonic Symbols
+\section{Library Section VII: Lexicon of Harmonic Symbols}
+
+\subsection{Book 1: Symbolic Equations}
+\codexheader{7.1.1}
+\input{section7/book1/chapter1_symbolic_equations}
+\codexheader{7.1.2}
+\input{section7/book1/h_x_section}
+
+\subsection{Book 2: Glyph Tables}
+\codexheader{7.2.1}
+\input{section7/book2/chapter2_glyph_tables}
+\codexheader{7.2.2}
+\input{section7/book2/symbol_glyphs}
+
+\subsection{Book 3: Number Tables and Miscellaneous}
+\codexheader{7.3.1}
+\input{section7/book3/number_tables}
+\codexheader{7.3.2}
+\input{section7/book3/chapter3_mathematical_constants}
+\codexheader{7.3.3}
+\input{section7/book3/chapter3_prime_frequencies}
+\codexheader{7.3.4}
+\input{section7/book3/chapter3_sacred_giants}
+\codexheader{7.3.5}
+\input{section7/book3/codex_physical_constants}
+\codexheader{7.3.6}
+\input{section7/book3/codex_harmonic_constants_transformations}
+
+\subsection{Book 4: Transformation Protocols}
+\codexheader{7.4.1}
+\input{section7/book4/chapter4_transformation_protocols}
+\codexheader{7.4.2}
+\input{section7/book4/chapter4_harmonic_transformation_protocols}
+\codexheader{7.4.3}
+\input{section7/book4/codex_naming_protocol}
+
+\subsection{Book 5: Coda}
+\codexheader{7.5.1}
+\input{section7/book5/chapter5_coda_harmonic_unity_achieved}
+\codexheader{7.5.2}
+\input{section7/book5/codex_bible_omega_coda}
+
+\bibliographystyle{plain}
+\bibliography{references}
+
+\end{document}
