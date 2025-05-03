@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Codex of Harmonic Unity - Cover</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <style>
+    .cover-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 80vh;
+      padding: 2rem;
+    }
+    .cover-image {
+      max-width: 100%;
+      max-height: 80vh;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      border-radius: 4px;
+    }
+    .navigation-buttons {
+      position: fixed;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+    }
+    .navigation-buttons .button {
+      margin: 0 1rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>The Codex of Harmonic Unity</h1>
+    <p>Cover Page</p>
+  </header>
+  
+  <main>
+    <div class="cover-container">
+      <img src="pdfs/cover.pdf" alt="The Codex of Harmonic Unity Cover" class="cover-image" />
+    </div>
+    
+    <div class="navigation-buttons">
+      <a href="index.html" class="button"><i class="fas fa-home"></i> Return to Codex</a>
+      <a href="pdfs/cover.pdf" download class="button"><i class="fas fa-download"></i> Download Cover</a>
+    </div>
+  </main>
+  
+  <footer>
+    <p>&copy; 2025 Mikaël Theoret</p>
+  </footer>
+</body>
+</html>

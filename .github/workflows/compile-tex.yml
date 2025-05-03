@@ -22,27 +22,186 @@ jobs:
           tlmgr install siunitx
           tlmgr install graphics
           tlmgr install xcolor
+          tlmgr install geometry
+          tlmgr install tikz
+          tlmgr install hyperref
+          tlmgr install babel
+          tlmgr install float
+          tlmgr install caption
+          tlmgr install subcaption
+          tlmgr install environ
+          tlmgr install trimspaces
+          tlmgr install textpos
+          tlmgr install pagecolor
+          tlmgr install afterpage
+          tlmgr install xmpincl
+          tlmgr install pdfpages
+          tlmgr install enumitem
+          tlmgr install tocloft
+          tlmgr install titletoc
+          tlmgr install titlesec
+          tlmgr install fancyhdr
+          tlmgr install etoolbox
+          tlmgr install adjustbox
+          tlmgr install collectbox
+          tlmgr install wasysym
+          tlmgr install amssymb
+          tlmgr install amsfonts
+          tlmgr install ulem
+          tlmgr install xspace
+          tlmgr install verbatim
+          tlmgr install listings
       
-      - name: Find TeX files
-        id: find_tex
-        run: |
-          echo "TEX_FILES<<EOF" >> $GITHUB_ENV
-          find . -name "*.tex" | sed 's|^\./||' >> $GITHUB_ENV
-          echo "EOF" >> $GITHUB_ENV
-      
-      - name: Compile LaTeX documents
+      - name: Compile cover
         run: |
           mkdir -p pdfs
-          for file in ${{ env.TEX_FILES }}; do
-            echo "Compiling $file"
-            directory=$(dirname "$file")
-            filename=$(basename "$file" .tex)
-            pdflatex -interaction=nonstopmode -output-directory="$directory" "$file" || true
-            pdflatex -interaction=nonstopmode -output-directory="$directory" "$file" || true
-            # Move the generated PDF to the pdfs directory
-            if [ -f "$directory/$filename.pdf" ]; then
-              mkdir -p "pdfs/$directory"
-              cp "$directory/$filename.pdf" "pdfs/$directory/$filename.pdf"
+          pdflatex -interaction=nonstopmode cover.tex
+          pdflatex -interaction=nonstopmode cover.tex
+          if [ -f "cover.pdf" ]; then
+            cp cover.pdf pdfs/cover.pdf
+          fi
+      
+      - name: Compile main document
+        run: |
+          pdflatex -interaction=nonstopmode main.tex
+          pdflatex -interaction=nonstopmode main.tex
+          if [ -f "main.pdf" ]; then
+            cp main.pdf pdfs/codex.pdf
+          fi
+      
+      - name: Compile individual TeX documents
+        run: |
+          # Create a standalone document for each tex file
+          for file in codex_*.tex; do
+            if [ -f "$file" ]; then
+              filename=$(basename "$file" .tex)
+              echo "Processing $file..."
+              
+              # Create standalone file with preamble
+              cat > "${filename}_standalone.tex" << EOF
+\\documentclass[11pt, a4paper]{article}
+\\usepackage[utf8]{inputenc}
+\\usepackage[T1]{fontenc}
+\\usepackage{lmodern}
+\\usepackage{amsmath, amssymb, amsfonts}
+\\usepackage{physics}
+\\usepackage{graphicx}
+\\usepackage{hyperref}
+\\usepackage{xcolor}
+\\usepackage{geometry}
+\\usepackage{tikz}
+\\usepackage{enumitem}
+\\usepackage{listings}
+\\usepackage{verbatim}
+\\usepackage{caption}
+\\usepackage{subcaption}
+\\usepackage{float}
+\\usepackage{fancyhdr}
+\\usepackage{etoolbox}
+
+\\geometry{a4paper, margin=1in}
+\\pagestyle{fancy}
+\\fancyhf{}
+\\fancyhead[L]{\\leftmark}
+\\fancyhead[R]{\\thepage}
+
+\\title{${filename//_/ }}
+\\author{Mikaël Theoret}
+\\date{\\today}
+
+\\begin{document}
+\\maketitle
+\\tableofcontents
+\\newpage
+
+EOF
+              
+              # Add the content
+              cat "$file" >> "${filename}_standalone.tex"
+              
+              echo "\\end{document}" >> "${filename}_standalone.tex"
+              
+              # Compile
+              pdflatex -interaction=nonstopmode "${filename}_standalone.tex"
+              pdflatex -interaction=nonstopmode "${filename}_standalone.tex"
+              
+              # Move to pdfs directory
+              if [ -f "${filename}_standalone.pdf" ]; then
+                mv "${filename}_standalone.pdf" "pdfs/${filename}.pdf"
+              fi
+              
+              # Clean up
+              rm -f "${filename}_standalone.tex" "${filename}_standalone.aux" "${filename}_standalone.log" "${filename}_standalone.out" "${filename}_standalone.toc"
+            fi
+          done
+      
+      - name: Compile Library Sections
+        run: |
+          for dir in Library*; do
+            if [ -d "$dir" ]; then
+              section_name=$(echo "$dir" | sed 's/Library Section //' | sed 's/_/ /g')
+              mkdir -p "pdfs/$dir"
+              
+              # Compile all tex files in the directory
+              for file in "$dir"/*.tex; do
+                if [ -f "$file" ]; then
+                  filename=$(basename "$file" .tex)
+                  cd "$dir"
+                  
+                  # Create standalone file
+                  cat > "${filename}_standalone.tex" << EOF
+\\documentclass[11pt, a4paper]{article}
+\\usepackage[utf8]{inputenc}
+\\usepackage[T1]{fontenc}
+\\usepackage{lmodern}
+\\usepackage{amsmath, amssymb, amsfonts}
+\\usepackage{physics}
+\\usepackage{graphicx}
+\\usepackage{hyperref}
+\\usepackage{xcolor}
+\\usepackage{geometry}
+\\usepackage{tikz}
+\\usepackage{enumitem}
+\\usepackage{listings}
+\\usepackage{verbatim}
+\\geometry{a4paper, margin=1in}
+
+\\title{${filename//_/ }}
+\\author{Mikaël Theoret}
+\\date{\\today}
+
+\\begin{document}
+\\maketitle
+
+EOF
+                  
+                  cat "${filename}.tex" >> "${filename}_standalone.tex"
+                  echo "\\end{document}" >> "${filename}_standalone.tex"
+                  
+                  pdflatex -interaction=nonstopmode "${filename}_standalone.tex"
+                  pdflatex -interaction=nonstopmode "${filename}_standalone.tex"
+                  
+                  if [ -f "${filename}_standalone.pdf" ]; then
+                    mv "${filename}_standalone.pdf" "../pdfs/$dir/${filename}.pdf"
+                  fi
+                  
+                  # Clean up
+                  rm -f "${filename}_standalone.tex" "${filename}_standalone.aux" "${filename}_standalone.log" "${filename}_standalone.out"
+                  
+                  cd ..
+                fi
+              done
+            fi
+          done
+      
+      - name: Create chapter structure
+        run: |
+          mkdir -p pdfs/chapters
+          # Move specific chapters to the chapters directory
+          for chapter in "foundations of knowledge" "the scientific method" "harmonic principles" "metaphysical frameworks" "triadic systems"; do
+            chapter_file=$(echo $chapter | sed 's/ /_/g')
+            if [ -f "pdfs/codex_${chapter_file}.pdf" ]; then
+              cp "pdfs/codex_${chapter_file}.pdf" "pdfs/chapters/${chapter_file}.pdf"
             fi
           done
       

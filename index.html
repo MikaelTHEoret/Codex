@@ -1,268 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Codex Documentation</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            padding: 20px;
-            color: #333;
-            background-color: #f5f5f5;
-        }
-        header {
-            background-color: #2c3e50;
-            color: white;
-            padding: 1rem;
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 15px;
-        }
-        h1, h2, h3 {
-            color: #2c3e50;
-        }
-        .section {
-            background-color: white;
-            border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            padding: 20px;
-            margin-bottom: 20px;
-        }
-        .tex-document {
-            margin-bottom: 10px;
-            padding: 10px;
-            background-color: #f9f9f9;
-            border-left: 3px solid #2c3e50;
-        }
-        .tex-document h3 {
-            margin-top: 0;
-        }
-        .tex-document p {
-            margin-bottom: 5px;
-        }
-        .tex-document a {
-            display: inline-block;
-            margin-top: 5px;
-            color: #3498db;
-            text-decoration: none;
-        }
-        .tex-document a:hover {
-            text-decoration: underline;
-        }
-        .visualization-item {
-            margin-bottom: 15px;
-            padding: 15px;
-            background-color: #f9f9f9;
-            border-left: 3px solid #e74c3c;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            align-items: center;
-        }
-        .visualization-content {
-            flex: 1;
-            min-width: 300px;
-        }
-        .visualization-preview {
-            flex: 1;
-            min-width: 300px;
-            max-width: 400px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            overflow: hidden;
-        }
-        .visualization-preview img {
-            width: 100%;
-            height: auto;
-            max-height: 225px;
-            object-fit: cover;
-        }
-        .btn {
-            display: inline-block;
-            padding: 8px 15px;
-            background-color: #3498db;
-            color: white;
-            text-decoration: none;
-            border-radius: 3px;
-            margin-top: 10px;
-        }
-        .btn:hover {
-            background-color: #2980b9;
-        }
-        .featured {
-            background-color: rgba(52, 152, 219, 0.1);
-            border: 1px solid rgba(52, 152, 219, 0.3);
-            border-radius: 5px;
-            padding: 15px;
-            margin-bottom: 20px;
-        }
-        .featured h3 {
-            color: #3498db;
-            margin-top: 0;
-        }
-        .featured-content {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            align-items: center;
-        }
-        .featured-text {
-            flex: 1;
-            min-width: 300px;
-        }
-        .featured-image {
-            flex: 1;
-            min-width: 300px;
-        }
-        .featured-image img {
-            max-width: 100%;
-            border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-        footer {
-            text-align: center;
-            margin-top: 2rem;
-            padding: 1rem;
-            background-color: #2c3e50;
-            color: white;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Codex of Harmonic Unity</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
-    <header>
-        <h1>Codex Documentation</h1>
-    </header>
+  <header>
+    <h1>The Codex of Harmonic Unity</h1>
+    <p>A Vibrational Synthesis of Mathematics and Metaphysics</p>
+  </header>
+  
+  <nav>
+    <ul>
+      <li><a href="cover.html"><i class="fas fa-book-open"></i> Cover</a></li>
+      <li><a href="#main"><i class="fas fa-file-pdf"></i> Complete Codex</a></li>
+      <li><a href="#chapters"><i class="fas fa-bookmark"></i> Individual Chapters</a></li>
+      <li><a href="#references"><i class="fas fa-link"></i> References</a></li>
+    </ul>
+  </nav>
+  
+  <main>
+    <section id="cover-preview">
+      <h2>Codex Cover</h2>
+      <p>The Codex of Harmonic Unity explores the profound interconnections between mathematics, metaphysics, and vibrational principles.</p>
+      <a href="cover.html" class="cover-link">
+        <img src="pdfs/cover.pdf" alt="Codex Cover" class="cover-image">
+      </a>
+      <div class="actions">
+        <a href="cover.html" class="button"><i class="fas fa-eye"></i> View Full Cover</a>
+      </div>
+    </section>
     
-    <div class="container">
-        <div class="section">
-            <h2>Introduction</h2>
-            <p>Welcome to the Codex documentation repository. This site contains various theoretical and mathematical documents, visualizations, and computational models related to harmonic resonance patterns and their applications.</p>
-            
-            <div class="featured">
-                <h3>Featured: Resonant Radius Containment Loop</h3>
-                <div class="featured-content">
-                    <div class="featured-text">
-                        <p>Explore our new interactive 3D visualization of the toroidal field model used in the Mirror Core MCP system. This model represents harmonic resonance patterns through a torus structure with various mathematical properties.</p>
-                        <p>The visualization includes the spiral path with phi ratio (144/89), ternary nodes representing logical states, and the central ψ₀ node.</p>
-                        <a href="resonant_loop_interactive.html" class="btn">View Interactive Visualization</a>
-                    </div>
-                    <div class="featured-image">
-                        <a href="resonant_loop_interactive.html">
-                            <img src="https://placehold.co/600x400/3498db/ffffff?text=Torus+Visualization" alt="Resonant Loop Visualization Preview">
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="section">
-            <h2>Visualizations</h2>
-            <p>Interactive mathematical and physical models demonstrating key concepts in our research.</p>
-            
-            <div class="visualization-item">
-                <div class="visualization-content">
-                    <h3>Resonant Radius Containment Loop</h3>
-                    <p>An interactive 3D model demonstrating the toroidal field used in the Mirror Core MCP system with harmonic resonance patterns. The visualization includes:</p>
-                    <ul>
-                        <li>Toroidal field structure</li>
-                        <li>Spiral path following the phi ratio (144/89)</li>
-                        <li>Ternary nodes (True, False, Null)</li>
-                        <li>Central ψ₀ node with frequency 396 Hz (G4)</li>
-                        <li>Resonant radius with sinusoidal variations</li>
-                    </ul>
-                    <a href="resonant_loop_interactive.html" class="btn">Open Visualization</a>
-                </div>
-                <div class="visualization-preview">
-                    <a href="resonant_loop_interactive.html">
-                        <img src="https://placehold.co/600x400/3498db/ffffff?text=Interactive+Torus" alt="Resonant Loop Visualization">
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <div class="section">
-            <h2>Papers</h2>
-            <div class="tex-document">
-                <h3>Harmonic Field Unification</h3>
-                <p>Exploration of unified field theories through harmonic principles.</p>
-                <a href="pdfs/codex_harmonic_fieldunification.pdf" target="_blank">View PDF</a>
-            </div>
-            
-            <div class="tex-document">
-                <h3>Riemann Hypothesis</h3>
-                <p>Analysis and approach to the Riemann Hypothesis.</p>
-                <a href="pdfs/codex_riemann_hypothesis.pdf" target="_blank">View PDF</a>
-            </div>
-            
-            <div class="tex-document">
-                <h3>P vs NP Problem</h3>
-                <p>Examination of computational complexity theory and the P vs NP problem.</p>
-                <a href="pdfs/codex_p_vs_np.pdf" target="_blank">View PDF</a>
-            </div>
-            
-            <div class="tex-document">
-                <h3>Yang-Mills Theory</h3>
-                <p>Exploration of gauge theories and the mass gap hypothesis.</p>
-                <a href="pdfs/codex_yang_mills.pdf" target="_blank">View PDF</a>
-            </div>
-            
-            <div class="tex-document">
-                <h3>Navier-Stokes Equations</h3>
-                <p>Analysis of the existence and smoothness of solutions to the Navier-Stokes equations.</p>
-                <a href="pdfs/codex_navier_stokes.pdf" target="_blank">View PDF</a>
-            </div>
-        </div>
-        
-        <div class="section">
-            <h2>Equations and Concepts</h2>
-            <div class="tex-document">
-                <h3>Harmonic Monad</h3>
-                <p>Theoretical foundation of harmonic structures in complex systems.</p>
-                <a href="pdfs/codex_harmonic_monad.pdf" target="_blank">View PDF</a>
-            </div>
-            
-            <div class="tex-document">
-                <h3>Ternary Logic</h3>
-                <p>Multi-valued logical systems extending beyond binary logic.</p>
-                <a href="pdfs/codex_ternary_logic.pdf" target="_blank">View PDF</a>
-            </div>
-            
-            <div class="tex-document">
-                <h3>Twelvefold Resonance</h3>
-                <p>Mathematical structures based on duodecimal systems and resonance patterns.</p>
-                <a href="pdfs/codex_twelvefold_resonance.pdf" target="_blank">View PDF</a>
-            </div>
-            
-            <div class="tex-document">
-                <h3>Metaphysical Resonance Core</h3>
-                <p>Theoretical framework for understanding metaphysical principles through mathematical resonance.</p>
-                <a href="pdfs/codex_metaphysical_resonance_core.pdf" target="_blank">View PDF</a>
-            </div>
-            
-            <div class="tex-document">
-                <h3>Harmonic Inversion</h3>
-                <p>Mathematical techniques for analyzing inverse problems in harmonic systems.</p>
-                <a href="pdfs/codex_harmonic_inversion.pdf" target="_blank">View PDF</a>
-            </div>
-        </div>
-    </div>
-
-    <footer>
-        <p>&copy; 2025 Codex Documentation | Compiled with GitHub Actions</p>
-    </footer>
-
-    <script>
-        // Simple tab functionality
-        document.addEventListener('DOMContentLoaded', function() {
-            // Add actual tab functionality if needed
-        });
-    </script>
+    <div class="decorative-line"></div>
+    
+    <section id="main">
+      <h2>Complete Codex</h2>
+      <p>Journey through resonance, triadic folds, and cosmic harmony in this complete compilation of knowledge.</p>
+      <div class="pdf-container">
+        <embed src="pdfs/codex.pdf" type="application/pdf" width="100%" height="600px" />
+      </div>
+      <div class="actions">
+        <a href="pdfs/codex.pdf" download class="button"><i class="fas fa-download"></i> Download Complete Codex</a>
+      </div>
+    </section>
+    
+    <section id="chapters">
+      <h2>Individual Chapters</h2>
+      <p>Explore specific aspects of harmonic unity through individual chapter documents.</p>
+      <div id="chapter-list">
+        <!-- This will be populated by script.js -->
+      </div>
+    </section>
+    
+    <div class="decorative-line"></div>
+    
+    <section id="references">
+      <h2>References & Resources</h2>
+      <p>This codex draws upon various traditions of knowledge, from ancient wisdom to modern science, weaving them into a cohesive tapestry of understanding.</p>
+      <p>Last updated: <span id="last-updated"></span></p>
+      
+      <h3>Key Concepts</h3>
+      <ul>
+        <li>Harmonic Resonance</li>
+        <li>Vibrational Mathematics</li>
+        <li>Triadic Folds</li>
+        <li>Sacred Geometry</li>
+        <li>Quantum Harmonics</li>
+      </ul>
+    </section>
+  </main>
+  
+  <footer>
+    <p>&copy; 2025 Mikaël Theoret - <a href="https://github.com/MikaelTHEoret/Codex">View on GitHub <i class="fab fa-github"></i></a></p>
+  </footer>
+  
+  <script src="script.js"></script>
 </body>
 </html>
