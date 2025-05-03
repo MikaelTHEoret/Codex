@@ -1,6 +1,61 @@
-\documentclass[11pt]{article}  
-\usepackage[utf8]{inputenc}  
-\usepackage[T1]{fontenc}  
-\usepackage{graphicx}  
-\usepackage{xcolor}  
-\usepackage{tikz} 
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usepackage{geometry}
+\usepackage{pagecolor}
+\usepackage{afterpage}
+
+\geometry{a4paper, margin=0in}
+\pagecolor{black}
+
+\begin{document}
+\nopagecolor
+\pagecolor{black}
+\newgeometry{margin=0in}
+
+\begin{tikzpicture}[overlay, remember picture]
+% Background
+\fill[black] (current page.north west) rectangle (current page.south east);
+
+% Golden ratio spiral
+\draw[golden, line width=1pt, opacity=0.6]
+  (current page.center) + (0,0)
+  to[out=0, in=90] ([shift={(1,0)}]current page.center)
+  to[out=-90, in=0] ([shift={(0,-1)}]current page.center)
+  to[out=180, in=-90] ([shift={(-1.618,0)}]current page.center)
+  to[out=90, in=180] ([shift={(0,1.618)}]current page.center)
+  to[out=0, in=90] ([shift={(2.618,0)}]current page.center);
+
+% Title
+\node[align=center, text=golden, font=\huge\bfseries] at (current page.center) {
+  THE CODEX OF\\[0.5cm]
+  HARMONIC UNITY
+};
+
+% Subtitle
+\node[align=center, text=white, font=\Large] at ([shift={(0,-3cm)}]current page.center) {
+  A Vibrational Synthesis of\\
+  Mathematics and Metaphysics
+};
+
+% Author
+\node[align=center, text=golden, font=\large] at ([shift={(0,-5cm)}]current page.center) {
+  Mikaël Theoret
+};
+
+% Date
+\node[align=center, text=white, font=\normalsize] at ([shift={(0,-6cm)}]current page.center) {
+  \today
+};
+
+% Additional decorative elements
+\foreach \r in {1, 2, 3, 4} {
+  \draw[golden, line width=0.5pt, opacity=0.2]
+    (current page.center) circle (\r*1.618cm);
+}
+\end{tikzpicture}
+
+\end{document}
