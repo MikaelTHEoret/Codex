@@ -26,11 +26,16 @@
     <section id="cover-preview">
       <h2>Codex Cover</h2>
       <p>The Codex of Harmonic Unity explores the profound interconnections between mathematics, metaphysics, and vibrational principles.</p>
-      <a href="cover.html" class="cover-link">
-        <img src="pdfs/cover.pdf" alt="Codex Cover" class="cover-image">
-      </a>
+      <div class="cover-preview">
+        <a href="cover.html">
+          <img src="pdfs/cover.pdf" alt="Codex Cover - Click to view in full" 
+               style="max-width: 300px; height: auto; border: 1px solid #b49640; border-radius: 5px;"
+               onerror="this.onerror=null; this.src='pdfs/cover-simple.pdf'; this.alt='Codex Cover - Click to view';">
+        </a>
+      </div>
       <div class="actions">
         <a href="cover.html" class="button"><i class="fas fa-eye"></i> View Full Cover</a>
+        <a href="pdfs/cover.pdf" class="button" download><i class="fas fa-download"></i> Download Cover</a>
       </div>
     </section>
     
@@ -39,10 +44,17 @@
     <section id="main">
       <h2>Complete Codex</h2>
       <p>Journey through resonance, triadic folds, and cosmic harmony in this complete compilation of knowledge.</p>
-      <div class="pdf-container">
-        <embed src="pdfs/codex.pdf" type="application/pdf" width="100%" height="600px" />
+      <div class="pdf-preview">
+        <object data="pdfs/codex.pdf" type="application/pdf" width="100%" height="600">
+          <iframe src="pdfs/codex.pdf" width="100%" height="600">
+            <p>Your browser does not support the viewing of PDF files. 
+               <a href="pdfs/codex.pdf">Click here to download the PDF file.</a>
+            </p>
+          </iframe>
+        </object>
       </div>
       <div class="actions">
+        <a href="pdfs/codex.pdf" class="button"><i class="fas fa-eye"></i> View in Browser</a>
         <a href="pdfs/codex.pdf" download class="button"><i class="fas fa-download"></i> Download Complete Codex</a>
       </div>
     </section>
@@ -58,7 +70,7 @@
     <div class="decorative-line"></div>
     
     <section id="references">
-      <h2>References & Resources</h2>
+      <h2>References &amp; Resources</h2>
       <p>This codex draws upon various traditions of knowledge, from ancient wisdom to modern science, weaving them into a cohesive tapestry of understanding.</p>
       <p>Last updated: <span id="last-updated"></span></p>
       
