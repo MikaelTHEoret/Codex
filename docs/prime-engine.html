@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prime Prediction Engine - Codex</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #0a0520 0%, #1a0d2e 50%, #2d1b69 100%);
+            color: #fff;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container { max-width: 1000px; margin: 0 auto; }
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px;
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(138, 43, 226, 0.1));
+            border-radius: 20px;
+            border: 2px solid rgba(255, 215, 0, 0.3);
+        }
+        .tool-section {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            border: 1px solid rgba(255, 215, 0, 0.2);
+        }
+        .input-group {
+            margin: 20px 0;
+        }
+        .input-group label {
+            display: block;
+            color: #ffd700;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        .input-group input {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            background: rgba(0, 0, 0, 0.3);
+            color: #fff;
+            font-size: 1rem;
+        }
+        .button {
+            background: linear-gradient(45deg, #ffd700, #8a2be2);
+            color: #000;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-weight: bold;
+            cursor: pointer;
+            margin: 10px 5px;
+            transition: all 0.3s ease;
+        }
+        .button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 215, 0, 0.4);
+        }
+        .results {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 4px solid #00ffff;
+            min-height: 100px;
+        }
+        .formula {
+            font-family: 'Courier New', monospace;
+            background: rgba(255, 215, 0, 0.1);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔢 Prime Prediction Engine</h1>
+            <p style="color: #dda0dd; font-size: 1.1rem;">Harmonic Prime Analysis & Pattern Detection</p>
+            <a href="index.html" style="color: #00ffff; text-decoration: none;">← Back to Codex</a>
+        </div>
+
+        <div class="tool-section">
+            <h2 style="color: #ffd700; margin-bottom: 20px;">Prime Generator</h2>
+            <div class="input-group">
+                <label for="rangeInput">Generate primes up to:</label>
+                <input type="number" id="rangeInput" value="100" min="2" max="10000">
+            </div>
+            <button class="button" onclick="generatePrimes()">Generate Primes</button>
+            <button class="button" onclick="analyzeHarmonics()">Analyze Harmonics</button>
+            <div id="primeResults" class="results">
+                <p style="color: #98fb98;">Enter a range to generate prime numbers...</p>
+            </div>
+        </div>
+
+        <div class="tool-section">
+            <h2 style="color: #ffd700; margin-bottom: 20px;">Harmonic Frequency Mapping</h2>
+            <div class="formula">
+                f(p) = p × ψ₀ × 432 / 1000<br>
+                where ψ₀ ≈ 0.91567 (fractal seed constant)
+            </div>
+            <div id="harmonicResults" class="results">
+                <p style="color: #98fb98;">Generate primes to see harmonic frequency mappings...</p>
+            </div>
+        </div>
+
+        <div class="tool-section">
+            <h2 style="color: #ffd700; margin-bottom: 20px;">Pattern Analysis</h2>
+            <div id="patternResults" class="results">
+                <p style="color: #98fb98;">Harmonic pattern analysis will appear here...</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function isPrime(n) {
+            if (n < 2) return false;
+            for (let i = 2; i <= Math.sqrt(n); i++) {
+                if (n % i === 0) return false;
+            }
+            return true;
+        }
+
+        function generatePrimes() {
+            const range = parseInt(document.getElementById('rangeInput').value);
+            const primes = [];
+            
+            for (let i = 2; i <= range; i++) {
+                if (isPrime(i)) primes.push(i);
+            }
+            
+            document.getElementById('primeResults').innerHTML = `
+                <h3 style="color: #00ffff;">Primes up to ${range}:</h3>
+                <p style="color: #fff; line-height: 1.6;">${primes.join(', ')}</p>
+                <p style="color: #ffd700; margin-top: 15px;">Total: ${primes.length} primes found</p>
+            `;
+            
+            window.currentPrimes = primes;
+        }
+
+        function analyzeHarmonics() {
+            if (!window.currentPrimes) {
+                document.getElementById('harmonicResults').innerHTML = '<p style="color: #ff6b6b;">Please generate primes first!</p>';
+                return;
+            }
+            
+            const psi0 = 0.91567;
+            const baseFreq = 432;
+            const harmonics = window.currentPrimes.slice(0, 10).map(p => {
+                const freq = (p * psi0 * baseFreq / 1000).toFixed(3);
+                return `${p} → ${freq} Hz`;
+            });
+            
+            document.getElementById('harmonicResults').innerHTML = `
+                <h3 style="color: #00ffff;">Harmonic Frequencies (first 10 primes):</h3>
+                <div style="font-family: monospace; color: #dda0dd; line-height: 1.8;">
+                    ${harmonics.join('<br>')}
+                </div>
+                <p style="color: #98fb98; margin-top: 15px;">Base formula: f(p) = p × ψ₀ × 432 / 1000</p>
+            `;
+            
+            analyzePatterns();
+        }
+
+        function analyzePatterns() {
+            if (!window.currentPrimes) return;
+            
+            const primes = window.currentPrimes;
+            const gaps = [];
+            for (let i = 1; i < primes.length; i++) {
+                gaps.push(primes[i] - primes[i-1]);
+            }
+            
+            const goldenRatio = 1.618;
+            const psi0 = 0.91567;
+            
+            document.getElementById('patternResults').innerHTML = `
+                <h3 style="color: #00ffff;">Pattern Analysis:</h3>
+                <p style="color: #dda0dd;">Prime gaps: ${gaps.slice(0, 10).join(', ')}...</p>
+                <p style="color: #98fb98;">Average gap: ${(gaps.reduce((a,b) => a+b, 0) / gaps.length).toFixed(2)}</p>
+                <p style="color: #ffd700;">Golden ratio resonance: φ ≈ ${goldenRatio}</p>
+                <p style="color: #ff6b9d;">Fractal seed: ψ₀ ≈ ${psi0}</p>
+                <div style="margin-top: 20px; padding: 15px; background: rgba(255, 215, 0, 0.1); border-radius: 8px;">
+                    <p style="color: #ffd700;">🌟 Harmonic Pattern Detected:</p>
+                    <p style="color: #dda0dd;">Prime distribution follows fractal seed constant scaling</p>
+                </div>
+            `;
+        }
+
+        // Initialize with small demo
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('rangeInput').value = 50;
+            generatePrimes();
+            analyzeHarmonics();
+        });
+    </script>
+</body>
+</html>

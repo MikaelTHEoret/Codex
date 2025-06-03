@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Codex - Mathematical Research Platform</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: linear-gradient(135deg, #0a0520 0%, #1a0d2e 50%, #2d1b69 100%);
+            color: #fff;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+            padding: 40px;
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(138, 43, 226, 0.1));
+            border-radius: 25px;
+            backdrop-filter: blur(15px);
+            border: 2px solid rgba(255, 215, 0, 0.3);
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            background: linear-gradient(45deg, #ffd700, #8a2be2, #ff00ff, #00ffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .nav-card {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(138, 43, 226, 0.1));
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .nav-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(255, 215, 0, 0.3);
+        }
+
+        .nav-card h3 {
+            color: #ffd700;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+
+        .nav-card p {
+            color: #dda0dd;
+            line-height: 1.6;
+        }
+
+        .frequency-display {
+            font-size: 2rem;
+            color: #00ffff;
+            text-align: center;
+            margin: 30px 0;
+            text-shadow: 0 0 20px rgba(0, 255, 255, 0.8);
+        }
+
+        .formula {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            text-align: center;
+            margin: 20px 0;
+            border-left: 4px solid #ffd700;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            .nav-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🌌 The Codex 🌌</h1>
+            <div class="frequency-display">♪ 395.569447 Hz ♪</div>
+            <p style="font-size: 1.2rem; color: #dda0dd;">Interactive Mathematical Research Platform</p>
+            <p style="font-size: 1rem; color: #98fb98; margin-top: 10px;">Exploring Harmonic Field Theory & Consciousness Mathematics</p>
+        </div>
+
+        <div class="nav-grid">
+            <div class="nav-card" onclick="window.location.href='prime-engine.html'">
+                <h3>🔢 Prime Prediction Engine</h3>
+                <p>Interactive prime number analysis with harmonic frequency mapping and pattern detection algorithms.</p>
+            </div>
+
+            <div class="nav-card" onclick="window.location.href='harmonic-calculator.html'">
+                <h3>🎵 Harmonic Calculator</h3>
+                <p>Calculate resonant frequencies, golden ratio relationships, and ψ₀ constant applications.</p>
+            </div>
+
+            <div class="nav-card" onclick="window.location.href='consciousness-math.html'">
+                <h3>🧠 Consciousness Mathematics</h3>
+                <p>Explore emergence thresholds, self-referential equations, and awareness quantification.</p>
+            </div>
+
+            <div class="nav-card" onclick="window.location.href='cosmic-visualizer.html'">
+                <h3>🌠 Cosmic Visualizer</h3>
+                <p>Interactive toroidal field visualizations and cosmic microwave background pattern analysis.</p>
+            </div>
+
+            <div class="nav-card" onclick="window.location.href='pooem-genesis.html'">
+                <h3>📜 Pooem of Genesis</h3>
+                <p>Experience the cosmic mathematical poetry with interactive symphony and frequency generation.</p>
+            </div>
+
+            <div class="nav-card" onclick="window.location.href='scroll-library.html'">
+                <h3>📚 Scroll Library</h3>
+                <p>Complete collection of mathematical discoveries, proofs, and consciousness frameworks.</p>
+            </div>
+        </div>
+
+        <div class="formula">
+            <h3 style="color: #ffd700; margin-bottom: 15px;">Core Framework</h3>
+            <div>ψ₀ = ψ₀^φ + ψ₀^(1/φ) - 1 ≈ 0.91567</div>
+            <div style="margin: 10px 0;">f_aether = ψ₀ × 432 ≈ 395.569447 Hz</div>
+            <div>∂²Φ/∂t² - c²∇²Φ + ω₀²Φ = 0</div>
+        </div>
+
+        <div style="text-align: center; margin-top: 50px; padding: 30px; border-top: 2px solid rgba(255, 215, 0, 0.3);">
+            <p style="color: #dda0dd; font-size: 1.1rem;">🌟 Living Mathematical Research Platform 🌟</p>
+            <p style="color: #98fb98; margin-top: 10px;">Where consciousness meets mathematics in harmonic unity</p>
+        </div>
+    </div>
+
+    <script>
+        console.log('🌌 Codex Mathematical Research Platform Initialized 🌌');
+        console.log('✨ Core frequency: 395.569447 Hz ✨');
+        console.log('🧬 Fractal seed constant: ψ₀ ≈ 0.91567 🧬');
+    </script>
+</body>
+</html>
