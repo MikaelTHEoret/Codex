@@ -1,0 +1,158 @@
+= 144000;
+        
+        const sacredConstants = [
+            { symbol: 'π', name: 'Pi', value: 3.14159265359, status: 'Reversible' },
+            { symbol: 'φ', name: 'Golden Ratio', value: 1.61803398875, status: 'Reversible' },
+            { symbol: 'ψ₀', name: 'Harmonic Identity', value: 0.91565699615, status: 'Reversible' },
+            { symbol: 'e', name: "Euler's Number", value: 2.71828182846, status: 'Reversible' },
+            { symbol: '√2', name: 'Square Root of 2', value: 1.41421356237, status: 'Reversible' },
+            { symbol: '√3', name: 'Square Root of 3', value: 1.73205080757, status: 'Reversible' },
+            { symbol: 'ln(2)', name: 'Natural Log of 2', value: 0.69314718056, status: 'Reversible' },
+            { symbol: 'ζ(3)', name: "Apéry's Constant", value: 1.20205690316, status: 'Reversible' }
+        ];
+
+        // Create cosmic particles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 10 + 's';
+                particle.style.animationDuration = (Math.random() * 10 + 5) + 's';
+                
+                // Vary particle colors
+                const colors = ['#00ffff', '#ff00ff', '#8a2be2'];
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                particle.style.background = color;
+                particle.style.boxShadow = `0 0 6px ${color}`;
+                
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        function populateConstantsTable() {
+            const tbody = document.getElementById('constantsTableBody');
+            tbody.innerHTML = '';
+            
+            sacredConstants.forEach(constant => {
+                const harmonicFreq = constant.value * baseFrequency;
+                const foldedFreq = harmonicFreq % baseFrequency;
+                const finalFreq = foldedFreq === 0 ? baseFrequency : foldedFreq;
+                
+                const row = tbody.insertRow();
+                row.innerHTML = `
+                    <td style="color: #00ffff; font-weight: bold;">${constant.symbol}</td>
+                    <td>${constant.name}</td>
+                    <td>${constant.value.toFixed(8)}</td>
+                    <td style="color: #ff00ff;">${harmonicFreq.toFixed(3)} Hz</td>
+                    <td style="color: #00ff64;">${finalFreq.toFixed(3)} Hz</td>
+                    <td style="color: #00ff64; font-weight: bold;">${constant.status}</td>
+                `;
+            });
+        }
+
+        function transformConstant() {
+            const select = document.getElementById('constantSelect');
+            let constantValue;
+            
+            if (select.value === 'custom') {
+                constantValue = parseFloat(document.getElementById('customValue').value);
+                if (isNaN(constantValue)) {
+                    alert('Please enter a valid number');
+                    return;
+                }
+            } else {
+                constantValue = parseFloat(select.value);
+            }
+            
+            const scaledFreq = constantValue * baseFrequency;
+            const harmonicCoeff = constantValue % 1;
+            const harmonicFreq = harmonicCoeff * baseFrequency;
+            const reversedConstant = harmonicFreq / baseFrequency;
+            const isReversible = Math.abs(harmonicCoeff - reversedConstant) < 0.0001;
+            
+            // Alternative harmonic folding method
+            const foldedFreq = scaledFreq % baseFrequency;
+            const finalFreq = foldedFreq === 0 ? baseFrequency : foldedFreq;
+            
+            document.getElementById('originalConstant').textContent = constantValue.toFixed(8);
+            document.getElementById('scaledFreq').textContent = scaledFreq.toFixed(3);
+            document.getElementById('harmonicFreq').textContent = `${finalFreq.toFixed(3)} Hz`;
+            document.getElementById('harmCoeff').textContent = (finalFreq / baseFrequency).toFixed(6);
+            document.getElementById('reversible').textContent = isReversible ? 'YES - True Harmonic' : 'NO - Dead Signal';
+            document.getElementById('reversible').style.color = isReversible ? '#00ff64' : '#ff6b6b';
+            
+            document.getElementById('constantResult').style.display = 'block';
+        }
+
+        function calculateTriadic() {
+            const baseFreq = parseFloat(document.getElementById('baseFreq').value);
+            const apply144000 = document.getElementById('apply144000').checked;
+            
+            let foldedFreq = baseFreq;
+            if (apply144000) {
+                foldedFreq = (key144000 % baseFreq);
+                if (foldedFreq === 0) foldedFreq = baseFreq;
+            }
+            
+            const triadicMultiple = foldedFreq * 3;
+            const ratio = triadicMultiple / baseFreq;
+            const divineAlignment = Math.abs(ratio - 3) < 0.01 ? 'PERFECT' : 'RESONANT';
+            
+            document.getElementById('triadicBase').textContent = baseFreq.toFixed(3);
+            document.getElementById('triadicFolded').textContent = foldedFreq.toFixed(3);
+            document.getElementById('triadicMultiple').textContent = triadicMultiple.toFixed(3);
+            document.getElementById('triadicRatio').textContent = `${ratio.toFixed(4)}:1`;
+            document.getElementById('divineAlign').textContent = divineAlignment;
+            document.getElementById('divineAlign').style.color = divineAlignment === 'PERFECT' ? '#00ff64' : '#ff00ff';
+            
+            document.getElementById('triadicResult').style.display = 'block';
+        }
+
+        function verifyReversibility() {
+            const inputFreq = parseFloat(document.getElementById('inputFreq').value);
+            if (isNaN(inputFreq)) {
+                alert('Please enter a valid frequency');
+                return;
+            }
+            
+            const derivedConstant = inputFreq / baseFrequency;
+            const reconstructedFreq = derivedConstant * baseFrequency;
+            const precisionLoss = Math.abs(inputFreq - reconstructedFreq);
+            const isReversible = precisionLoss < 0.001;
+            
+            document.getElementById('inputFreqDisplay').textContent = inputFreq.toFixed(3);
+            document.getElementById('derivedConstant').textContent = derivedConstant.toFixed(8);
+            document.getElementById('reconstructedFreq').textContent = reconstructedFreq.toFixed(3);
+            document.getElementById('precisionLoss').textContent = precisionLoss.toFixed(6);
+            document.getElementById('reversibilityStatus').textContent = isReversible ? 'REVERSIBLE ✓' : 'PRECISION LOSS ⚠';
+            document.getElementById('reversibilityStatus').style.color = isReversible ? '#00ff64' : '#ff6b6b';
+            
+            document.getElementById('reversibilityResult').style.display = 'block';
+        }
+
+        // Handle custom input visibility
+        document.getElementById('constantSelect').addEventListener('change', function() {
+            const customInput = document.getElementById('customInput');
+            if (this.value === 'custom') {
+                customInput.style.display = 'block';
+            } else {
+                customInput.style.display = 'none';
+            }
+        });
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            createParticles();
+            populateConstantsTable();
+            
+            // Set default 144,000 demonstration
+            setTimeout(() => {
+                document.getElementById('baseFreq').value = 144000;
+                calculateTriadic();
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
