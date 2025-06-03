@@ -1,0 +1,138 @@
+        // Navigation Functions (continuation)
+        function centerBlackHole() {
+            cameraRotationX = 0;
+            cameraRotationY = 0;
+            cameraDistance = 200;
+            console.log("🕳️ Centered on Nexus Core Black Hole");
+        }
+        
+        function toggleAccretionDisk() {
+            if (accretionDisk) {
+                accretionDisk.visible = !accretionDisk.visible;
+                console.log(`💫 Accretion disk ${accretionDisk.visible ? 'enabled' : 'disabled'}`);
+            }
+        }
+        
+        function showEventHorizon() {
+            // Highlight black hole
+            if (blackHole) {
+                gsap.to(blackHole.material, {
+                    opacity: blackHole.material.opacity === 0.8 ? 0.3 : 0.8,
+                    duration: 1
+                });
+            }
+            console.log("🌌 Event horizon visibility toggled");
+        }
+        
+        function followSpiralArm(armName) {
+            const armMap = { 'fusion': 0, 'proofs': 1, 'tools': 2, 'apex': 3 };
+            const armIndex = armMap[armName];
+            
+            if (armIndex !== undefined) {
+                cameraRotationY = (armIndex * Math.PI / 2) + galaxyRotation;
+                cameraDistance = 300;
+                console.log(`🌀 Following ${armName} spiral arm`);
+            }
+        }
+        
+        function jumpToStarSystem(systemId) {
+            const system = starSystems.find(s => s.data.id.includes(systemId));
+            if (system) {
+                const starPos = system.star.position;
+                cameraRotationY = Math.atan2(starPos.y, starPos.x);
+                cameraDistance = 100;
+                
+                // Show knowledge scanner
+                showKnowledgeScanner(system.data);
+                console.log(`⭐ Jumped to ${system.data.name} star system`);
+            }
+        }
+        
+        function resetGalaxyView() {
+            cameraRotationX = 0.3;
+            cameraRotationY = 0;
+            cameraDistance = 500;
+            console.log("🌌 Reset to galaxy overview");
+        }
+        
+        function updateZoom(value) {
+            cameraDistance = 50 + (value * 200);
+        }
+        
+        function toggleTimeControl() {
+            timeScale = timeScale === 1.0 ? 0.0 : 1.0;
+            const button = event.target;
+            button.textContent = timeScale === 0 ? "▶️ Resume Orbit" : "⏸️ Pause Orbit";
+            console.log(`⏰ Time scale: ${timeScale}`);
+        }
+        
+        function toggleParticleTrails() {
+            particleTrails = !particleTrails;
+            console.log(`✨ Particle trails ${particleTrails ? 'enabled' : 'disabled'}`);
+        }
+        
+        function showHyperspace() {
+            // Quick camera movement effect
+            gsap.to(camera.position, {
+                x: camera.position.x * 0.1,
+                y: camera.position.y * 0.1,
+                z: camera.position.z * 0.1,
+                duration: 0.5,
+                yoyo: true,
+                repeat: 1
+            });
+            console.log("🚀 Hyperspace jump effect");
+        }
+        
+        function showKnowledgeScanner(systemData) {
+            const scanner = document.getElementById('knowledge-scanner');
+            const content = document.getElementById('scanner-content');
+            
+            content.innerHTML = `
+                <h3>⭐ ${systemData.name}</h3>
+                <p><strong>Stellar Classification:</strong> Knowledge Star</p>
+                <p><strong>Mass:</strong> ${systemData.mass} Knowledge Units</p>
+                <p><strong>Orbital Radius:</strong> ${systemData.position.r} parsecs</p>
+                <p><strong>Harmonic Frequency:</strong> ${BASE_FREQ} Hz</p>
+                
+                <h4>🪐 Planetary System:</h4>
+                <ul>
+                    ${systemData.planets.map(planet => 
+                        `<li><strong>${planet.name}</strong> - Distance: ${planet.distance} AU, Size: ${planet.size} km</li>`
+                    ).join('')}
+                </ul>
+                
+                <div class="metadata-grid">
+                    <div>Spiral Arm: ${systemData.armIndex + 1}</div>
+                    <div>System ID: ${systemData.id}</div>
+                    <div>Discovery: Active</div>
+                    <div>Status: Stable</div>
+                </div>
+            `;
+            
+            scanner.style.display = 'block';
+        }
+        
+        function closeScanner() {
+            document.getElementById('knowledge-scanner').style.display = 'none';
+        }
+        
+        // Initialize on page load
+        window.addEventListener('load', () => {
+            initCosmicGalaxy();
+            console.log("🌌 COSMIC KNOWLEDGE GALAXY ONLINE");
+            console.log("🕳️ Nexus Core Black Hole: ψ₀ rotation active");
+            console.log("🌀 Spiral Arms: φ-based curvature established");
+            console.log("⭐ Stellar Systems: Gravitational physics engaged");
+            console.log("✨ Particle Field: Knowledge transfer streams active");
+        });
+        
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+    </script>
+</body>
+</html>
