@@ -2,6 +2,7 @@
   "name": "codex-autonomous-galaxy",
   "version": "1.0.0",
   "description": "Autonomous Gravitational Knowledge Galaxy with Frontend + API",
+  "type": "module",
   "main": "index.html",
   "scripts": {
     "build": "echo 'No build step required for static files'",
@@ -9,7 +10,9 @@
     "deploy": "vercel --prod"
   },
   "dependencies": {
-    "@datastax/astra-db-ts": "^1.0.0"
+    "@datastax/astra-db-ts": "^1.0.0",
+    "@vercel/node": "^3.0.0",
+    "cors": "^2.8.5"
   },
   "engines": {
     "node": ">=18.0.0"
@@ -20,7 +23,8 @@
     "gravitational-clustering",
     "knowledge-graph",
     "fractal-addressing",
-    "real-time-sync"
+    "real-time-sync",
+    "nexus-core"
   ],
   "author": "Mikael Theoret",
   "license": "MIT"
