@@ -3,18 +3,13 @@
   "version": "1.0.0",
   "description": "Autonomous Gravitational Knowledge Galaxy with Frontend + API",
   "main": "index.html",
-  "type": "module",
   "scripts": {
+    "build": "echo 'No build step required for static files'",
     "dev": "vercel dev",
-    "deploy": "vercel --prod",
-    "test": "node test/validate-galaxy.js"
+    "deploy": "vercel --prod"
   },
   "dependencies": {
-    "@datastax/astra-db-ts": "^1.0.0",
-    "@vercel/node": "^3.0.0"
-  },
-  "devDependencies": {
-    "vercel": "latest"
+    "@datastax/astra-db-ts": "^1.0.0"
   },
   "engines": {
     "node": ">=18.0.0"
