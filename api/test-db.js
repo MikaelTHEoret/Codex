@@ -1,9 +1,9 @@
 // 🚀 FIXED - Astra DB Connection Test for Autonomous Galaxy
-// Corrected for Vercel deployment with CommonJS
+// Corrected for Vercel deployment with ES modules
 
-const { DataAPIClient } = require('@datastax/astra-db-ts');
+import { Client } from '@datastax/astra-db-ts';
 
-module.exports = async function handler(req, res) {
+export default async function handler(req, res) {
   // CORS headers
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
@@ -26,7 +26,7 @@ module.exports = async function handler(req, res) {
     if (process.env.ASTRA_DB_APPLICATION_TOKEN && process.env.ASTRA_DB_API_ENDPOINT) {
       try {
         // ✅ CORRECTED CLIENT INITIALIZATION
-        const client = new DataAPIClient(process.env.ASTRA_DB_APPLICATION_TOKEN);
+        const client = new Client(process.env.ASTRA_DB_APPLICATION_TOKEN);
         const db = client.db(process.env.ASTRA_DB_API_ENDPOINT);
         
         // Test connection with timeout
@@ -55,12 +55,13 @@ module.exports = async function handler(req, res) {
             connection: "✅ Connected",
             collections: collections,
             fractal_nodes_count: fractalNodesCount,
-            client_type: "DataAPIClient"
+            client_type: "Client (ES Module)"
           },
           endpoints: {
             test: "/api/test-db",
             galaxy_nodes: "/api/galaxy-nodes",
-            auto_place: "/api/auto-place"
+            auto_place: "/api/auto-place",
+            galaxy: "/api/galaxy"
           },
           galaxy_status: "🌌 Ready for autonomous knowledge clustering",
           autonomous_features: [
@@ -119,4 +120,4 @@ module.exports = async function handler(req, res) {
       }
     });
   }
-};
+}
