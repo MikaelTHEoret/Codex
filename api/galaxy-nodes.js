@@ -1,7 +1,7 @@
 // 🌌 Autonomous Galaxy Nodes API - Complete Gravitational Knowledge Engine
-// /api/galaxy-nodes.js - Full autonomous positioning system (CommonJS)
+// /api/galaxy-nodes.js - Full autonomous positioning system (ES Module)
 
-const { DataAPIClient } = require('@datastax/astra-db-ts');
+import { Client } from '@datastax/astra-db-ts';
 
 // Mathematical & Physical Constants
 const PSI0 = 0.915670570874434;  // Fractal Seed Constant
@@ -11,7 +11,10 @@ const G = 6.67430e-11 * 1e15;     // Scaled Gravitational Constant
 
 // Initialize Astra DB connection
 function getAstraDB() {
-    const client = new DataAPIClient(process.env.ASTRA_DB_APPLICATION_TOKEN);
+    if (!process.env.ASTRA_DB_APPLICATION_TOKEN || !process.env.ASTRA_DB_API_ENDPOINT) {
+        throw new Error('Astra DB credentials not configured');
+    }
+    const client = new Client(process.env.ASTRA_DB_APPLICATION_TOKEN);
     const db = client.db(process.env.ASTRA_DB_API_ENDPOINT);
     return db;
 }
@@ -24,7 +27,7 @@ function setCORSHeaders(res) {
 }
 
 // Main API handler
-module.exports = async function handler(req, res) {
+export default async function handler(req, res) {
     setCORSHeaders(res);
     
     // Handle CORS preflight
@@ -63,7 +66,7 @@ module.exports = async function handler(req, res) {
             timestamp: new Date().toISOString()
         });
     }
-};
+}
 
 // Get all nodes in the galaxy
 async function handleGetNodes(collection, req, res) {
