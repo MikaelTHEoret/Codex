@@ -1,7 +1,7 @@
 // 🌌 Autonomous Galaxy Nodes API - Complete Gravitational Knowledge Engine
-// /api/galaxy-nodes.js - Full autonomous positioning system
+// /api/galaxy-nodes.js - Full autonomous positioning system (CommonJS)
 
-import { DataAPIClient } from '@datastax/astra-db-ts';
+const { DataAPIClient } = require('@datastax/astra-db-ts');
 
 // Mathematical & Physical Constants
 const PSI0 = 0.915670570874434;  // Fractal Seed Constant
@@ -24,7 +24,7 @@ function setCORSHeaders(res) {
 }
 
 // Main API handler
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
     setCORSHeaders(res);
     
     // Handle CORS preflight
@@ -63,7 +63,7 @@ export default async function handler(req, res) {
             timestamp: new Date().toISOString()
         });
     }
-}
+};
 
 // Get all nodes in the galaxy
 async function handleGetNodes(collection, req, res) {
@@ -280,7 +280,7 @@ async function performAutoPositioning(collection, node) {
     }
 }
 
-// Parse fractal address for spatial coordinates
+// Helper functions for gravitational mechanics
 function parseFractalAddress(address) {
     const parts = address.split('.');
     const parsed = {
@@ -318,7 +318,6 @@ function parseFractalAddress(address) {
     };
 }
 
-// Calculate semantic similarity for gravitational attraction
 async function calculateSemanticSimilarity(node1, node2) {
     const content1 = (node1.title + ' ' + (node1.content || '')).toLowerCase();
     const content2 = (node2.title + ' ' + (node2.content || '')).toLowerCase();
@@ -351,7 +350,6 @@ async function calculateSemanticSimilarity(node1, node2) {
     return Math.min(1.0, jaccard + mathBoost + addressSimilarity);
 }
 
-// Calculate gravitational force between nodes
 function calculateGravitationalForce(node1, node2, similarity) {
     const mass1 = node1.gravitational_mass || 1.0;
     const mass2 = node2.gravitational_mass || 1.0;
@@ -376,7 +374,6 @@ function calculateGravitationalForce(node1, node2, similarity) {
     };
 }
 
-// Calculate orbital mechanics around galactic center
 function calculateOrbitalMechanics(position) {
     const centerDistance = Math.sqrt(
         position.x * position.x + 
@@ -393,7 +390,6 @@ function calculateOrbitalMechanics(position) {
     };
 }
 
-// Calculate galaxy statistics
 function calculateGalaxyStatistics(nodes) {
     if (nodes.length === 0) return { message: 'Empty galaxy - ready for first knowledge' };
     
@@ -437,14 +433,12 @@ function calculateGalaxyStatistics(nodes) {
     };
 }
 
-// Generate unique node ID
 function generateNodeId(nodeData) {
     const timestamp = Date.now();
     const titleHash = (nodeData.title || 'unknown').replace(/\s+/g, '_').substring(0, 20);
     return `NEXUS.NODE.${titleHash}.${timestamp}`;
 }
 
-// Generate fractal address
 function generateFractalAddress(nodeData) {
     const domain = detectDomain(nodeData.title || '', nodeData.content || '');
     const timestamp = Date.now();
@@ -453,7 +447,6 @@ function generateFractalAddress(nodeData) {
     return `NEXUS.CORE.⧬✶⧬.${domain}.${titleSlug}.v1.0.${timestamp}`;
 }
 
-// Auto-detect content domain
 function detectDomain(title, content) {
     const text = (title + ' ' + content).toLowerCase();
     
