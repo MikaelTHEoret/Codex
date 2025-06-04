@@ -22,15 +22,25 @@ export default async function handler(req, res) {
     // If credentials are available, test connection
     if (process.env.ASTRA_DB_APPLICATION_TOKEN && process.env.ASTRA_DB_API_ENDPOINT) {
       try {
-        // Import Astra DB client
-        const { Client } = await import('@datastax/astra-db-ts');
+        // Import Astra DB client with proper ES module syntax for Vercel
+        const astraModule = await import('@datastax/astra-db-ts');
+        const Client = astraModule.Client || astraModule.default?.Client || astraModule.default;
+        
+        if (!Client) {
+          throw new Error('Failed to import Astra DB Client');
+        }
         
         // Test connection
         const client = new Client(process.env.ASTRA_DB_APPLICATION_TOKEN);
         const db = client.db(process.env.ASTRA_DB_API_ENDPOINT);
         
-        // Test basic operation
-        const collections = await db.listCollections();
+        // Test basic operation with timeout
+        const timeoutPromise = new Promise((_, reject) => 
+          setTimeout(() => reject(new Error('Connection timeout')), 10000)
+        );
+        
+        const collectionsPromise = db.listCollections();
+        const collections = await Promise.race([collectionsPromise, timeoutPromise]);
         
         return res.status(200).json({
           success: true,
@@ -55,10 +65,15 @@ export default async function handler(req, res) {
           message: "❌ Astra DB connection failed",
           ...dbStatus,
           error: dbError.message,
+          debug_info: {
+            error_type: dbError.constructor.name,
+            stack_trace: dbError.stack?.split('\n')[0]
+          },
           troubleshooting: [
             "🔧 Verify ASTRA_DB_APPLICATION_TOKEN is correct",
             "🔧 Verify ASTRA_DB_API_ENDPOINT format",
-            "🔧 Check if database is active in Astra console"
+            "🔧 Check if database is active in Astra console",
+            "🔧 Ensure database region matches endpoint URL"
           ]
         });
       }
