@@ -1,8 +1,13 @@
 {
+  "version": 2,
   "functions": {
     "api/**/*.js": {
       "maxDuration": 30
     }
+  },
+  "env": {
+    "ASTRA_DB_APPLICATION_TOKEN": "@astra_token",
+    "ASTRA_DB_API_ENDPOINT": "@astra_endpoint"
   },
   "headers": [
     {
@@ -19,8 +24,23 @@
         {
           "key": "Access-Control-Allow-Headers",
           "value": "Content-Type, Authorization"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
         }
       ]
     }
-  ]
+  ],
+  "rewrites": [
+    {
+      "source": "/api/test",
+      "destination": "/api/test-db"
+    }
+  ],
+  "build": {
+    "env": {
+      "NODE_ENV": "production"
+    }
+  }
 }
