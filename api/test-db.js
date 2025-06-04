@@ -1,7 +1,9 @@
 // 🚀 FIXED - Astra DB Connection Test for Autonomous Galaxy
-// Corrected import: DataAPIClient instead of Client
+// Corrected for Vercel deployment with CommonJS
 
-export default async function handler(req, res) {
+const { DataAPIClient } = require('@datastax/astra-db-ts');
+
+module.exports = async function handler(req, res) {
   // CORS headers
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
@@ -23,13 +25,6 @@ export default async function handler(req, res) {
     // If credentials are available, test connection
     if (process.env.ASTRA_DB_APPLICATION_TOKEN && process.env.ASTRA_DB_API_ENDPOINT) {
       try {
-        // ✅ CORRECTED IMPORT - DataAPIClient is the correct class
-        const { DataAPIClient } = await import('@datastax/astra-db-ts');
-        
-        if (!DataAPIClient || typeof DataAPIClient !== 'function') {
-          throw new Error(`DataAPIClient import failed - got: ${typeof DataAPIClient}`);
-        }
-        
         // ✅ CORRECTED CLIENT INITIALIZATION
         const client = new DataAPIClient(process.env.ASTRA_DB_APPLICATION_TOKEN);
         const db = client.db(process.env.ASTRA_DB_API_ENDPOINT);
@@ -64,7 +59,7 @@ export default async function handler(req, res) {
           },
           endpoints: {
             test: "/api/test-db",
-            galaxy_nodes: "/api/galaxy",
+            galaxy_nodes: "/api/galaxy-nodes",
             auto_place: "/api/auto-place"
           },
           galaxy_status: "🌌 Ready for autonomous knowledge clustering",
@@ -124,3 +119,4 @@ export default async function handler(req, res) {
       }
     });
   }
+};
