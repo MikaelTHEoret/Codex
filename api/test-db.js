@@ -1,4 +1,5 @@
-// Test Astra DB connection with CommonJS fallback
+// 🚀 FIXED - Astra DB Connection Test for Autonomous Galaxy
+// Corrected import: DataAPIClient instead of Client
 
 export default async function handler(req, res) {
   // CORS headers
@@ -22,101 +23,104 @@ export default async function handler(req, res) {
     // If credentials are available, test connection
     if (process.env.ASTRA_DB_APPLICATION_TOKEN && process.env.ASTRA_DB_API_ENDPOINT) {
       try {
-        // Try different import methods for Vercel compatibility
-        let Client;
-        try {
-          // Method 1: Named import
-          const { Client: NamedClient } = await import('@datastax/astra-db-ts');
-          Client = NamedClient;
-        } catch (e1) {
-          try {
-            // Method 2: Default import
-            const defaultImport = await import('@datastax/astra-db-ts');
-            Client = defaultImport.default;
-          } catch (e2) {
-            try {
-              // Method 3: Namespace import
-              const namespaceImport = await import('@datastax/astra-db-ts');
-              Client = namespaceImport.Client;
-            } catch (e3) {
-              throw new Error(`All import methods failed: ${e1.message}, ${e2.message}, ${e3.message}`);
-            }
-          }
+        // ✅ CORRECTED IMPORT - DataAPIClient is the correct class
+        const { DataAPIClient } = await import('@datastax/astra-db-ts');
+        
+        if (!DataAPIClient || typeof DataAPIClient !== 'function') {
+          throw new Error(`DataAPIClient import failed - got: ${typeof DataAPIClient}`);
         }
         
-        if (!Client || typeof Client !== 'function') {
-          throw new Error(`Client import failed - got: ${typeof Client}`);
-        }
-        
-        // Test connection
-        const client = new Client(process.env.ASTRA_DB_APPLICATION_TOKEN);
+        // ✅ CORRECTED CLIENT INITIALIZATION
+        const client = new DataAPIClient(process.env.ASTRA_DB_APPLICATION_TOKEN);
         const db = client.db(process.env.ASTRA_DB_API_ENDPOINT);
         
-        // Test basic operation with shorter timeout
+        // Test connection with timeout
+        console.log('🔍 Testing Astra DB connection...');
         const collections = await Promise.race([
           db.listCollections(),
           new Promise((_, reject) => 
-            setTimeout(() => reject(new Error('Connection timeout after 5s')), 5000)
+            setTimeout(() => reject(new Error('Connection timeout after 10s')), 10000)
           )
         ]);
         
+        // Test fractal_nodes collection specifically
+        let fractalNodesCount = 0;
+        try {
+          const fractalCollection = db.collection('fractal_nodes');
+          fractalNodesCount = await fractalCollection.estimatedDocumentCount();
+        } catch (collectionError) {
+          console.log('Note: fractal_nodes collection not found - will be created on first use');
+        }
+        
         return res.status(200).json({
           success: true,
-          message: "🗄️ Astra DB connection successful!",
+          message: "✅ Autonomous Knowledge Galaxy API Online!",
           ...dbStatus,
-          database_info: {
-            connection_status: "✅ Connected",
-            collections_found: collections.length,
-            collections: collections.map(c => c.name),
-            autonomous_galaxy_ready: true
+          astra_status: {
+            connection: "✅ Connected",
+            collections: collections,
+            fractal_nodes_count: fractalNodesCount,
+            client_type: "DataAPIClient"
           },
-          next_steps: [
-            "✅ Database connection verified",
-            "🌌 Ready for autonomous knowledge storage",
-            "🧲 Gravitational clustering will persist data"
+          endpoints: {
+            test: "/api/test-db",
+            galaxy_nodes: "/api/galaxy",
+            auto_place: "/api/auto-place"
+          },
+          galaxy_status: "🌌 Ready for autonomous knowledge clustering",
+          autonomous_features: [
+            "🧲 Gravitational positioning active",
+            "🌀 Semantic similarity clustering",
+            "⚡ Real-time synchronization",
+            "🔄 Auto-positioning algorithms"
           ]
         });
 
       } catch (dbError) {
-        return res.status(200).json({
+        console.error('❌ Astra DB Error:', dbError);
+        return res.status(500).json({
           success: false,
-          message: "⚠️ Database connection failed - operating in memory mode",
+          message: "❌ Astra DB connection failed",
           ...dbStatus,
           error: dbError.message,
-          memory_mode: {
-            status: "✅ Active",
-            description: "Autonomous positioning works without database",
-            capabilities: [
-              "🧲 Gravitational positioning functional",
-              "⚡ Real-time calculations active",
-              "🌌 Frontend integration ready"
-            ]
+          debug_info: {
+            error_type: dbError.constructor.name,
+            stack_trace: dbError.stack?.split('\n')[0] // First line only
           },
           troubleshooting: [
-            "🔧 Database optional - system works in memory mode",
-            "🔧 Gravitational mechanics independent of storage",
-            "🔧 Can add persistence later if needed"
+            "🔧 Verify ASTRA_DB_APPLICATION_TOKEN is correct",
+            "🔧 Verify ASTRA_DB_API_ENDPOINT format", 
+            "🔧 Check if database is active in Astra console",
+            "🔧 Ensure database region matches endpoint URL"
           ]
         });
       }
     } else {
-      return res.status(200).json({
+      return res.status(400).json({
         success: false,
-        message: "⚠️ Astra DB credentials not configured - memory mode active",
+        message: "❌ Missing Astra DB credentials",
         ...dbStatus,
-        memory_mode: {
-          status: "✅ Available",
-          description: "System fully functional without database persistence"
-        }
+        required_env_vars: [
+          "ASTRA_DB_APPLICATION_TOKEN",
+          "ASTRA_DB_API_ENDPOINT"
+        ],
+        setup_instructions: [
+          "1. Add environment variables in Vercel dashboard",
+          "2. Format: ASTRA_DB_APPLICATION_TOKEN=AstraCS:...",
+          "3. Format: ASTRA_DB_API_ENDPOINT=https://DATABASE_ID-REGION.apps.astra.datastax.com"
+        ]
       });
     }
 
   } catch (error) {
-    console.error('Database test error:', error);
+    console.error('❌ Unexpected API error:', error);
     return res.status(500).json({
       success: false,
+      message: "❌ Unexpected error occurred",
       error: error.message,
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
+      debug_info: {
+        error_type: error.constructor.name
+      }
     });
   }
-}
