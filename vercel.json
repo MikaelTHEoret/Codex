@@ -1,7 +1,9 @@
 {
   "version": 2,
+  "framework": null,
   "functions": {
     "api/**/*.js": {
+      "runtime": "nodejs18.x",
       "maxDuration": 30
     }
   },
@@ -38,9 +40,14 @@
       "destination": "/api/test-db"
     }
   ],
-  "build": {
-    "env": {
-      "NODE_ENV": "production"
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "/api/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/$1"
     }
-  }
+  ]
 }
